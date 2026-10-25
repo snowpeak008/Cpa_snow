@@ -1,6 +1,6 @@
-# Cpa_snow：CPA 当前部署快照
+# Snow Console 1.0.1：程序快照与清理后界面
 
-本仓库保存 2026-10-25 从运行服务器核对、筛选的 CPA 部署材料，供后续重新部署、查阅源码和维护插件使用。镜像固定到实际运行的 digest，动态插件及管理页面从服务器原样下载并核对 SHA256。
+本仓库保存 2026-10-25 从运行服务器核对、筛选的 CPA 部署材料，供后续重新部署、查阅源码和维护插件使用。镜像固定到实际运行的 digest，动态插件仍为核对过的原始产物；本版管理页面替换为已清理的五页 Snow 界面。
 
 账号、密钥和历史用量需要另行迁移。仓库内没有 OAuth 凭证、客户端 API Key、管理密码、代理密码或实际账号与代理对应表。
 
@@ -22,7 +22,7 @@
 ## 目录
 
 - `runtime/plugins/linux/amd64/`：当前服务器实际使用的五个 `.so`。
-- `runtime/panel/management.html`：当前服务器实际使用的管理页面。
+- `runtime/panel/management.html`：本版本清理后的管理页面，尚未部署生产。
 - `sources/CLIProxyAPI/`：上游 `v8.0.31` 干净源码，提交 `355fd10e76b82e03ba6625acc583b900286e4bf2`。
 - `sources/account-concurrency/`：与已部署 `1.2.1` 构建来源一致的自定义插件源码、测试和构建脚本。
 - `sources/apikeys/`、`sources/live-routes/`、`sources/quota-monitor/`、`sources/usage-report/`：对应发布版本的上游源码与许可。
@@ -60,3 +60,10 @@ docker compose up -d
 见 [重建与回退](docs/RESTORE_CN.md) 和 [筛选说明](docs/EXPORT_SCOPE_CN.md)。已验证原始产物哈希、来源版本、脱敏边界和模板初始化；没有用生产账号重新跑模型测试，也没有声称重新编译后能得到逐字节一致的镜像。
 
 保留各组件原许可证与版权信息。源码与发布产物的来源记录见 `metadata/sources.json` 和 [第三方声明](THIRD_PARTY_NOTICES.md)。
+
+## 1.0.1 界面代码清理
+
+主分支同步 A.0.2 的五页 Snow 界面，保留原目录布局。推广表单、余额查询依赖、代理推荐、旧中心页及其外链已从当前前端代码删除，不再靠隐藏入口处理。
+构建输入为 `web/panel-base.html`，运行 `python tools/build_brand.py`、`python tools/sync_portable_ui.py` 可重新生成并校验。
+说明和回退命令见 [本版清理记录](docs/UI_CLEANUP_1.0.1_CN.txt)。`1.0.0` tag、`A.0.1` 分支保持不动。
+本次仅本地/Git 变更，没有部署服务器。后端外部刷新、下载回退、必要 API 及许可证保持原样；不要将前端清理理解为全部出站访问被禁用。

@@ -1,0 +1,12 @@
+{
+  "version": "1.0.1",
+  "branch": "main",
+  "base_commit": "96154f7650de914635db6327ca226c3a94587baf",
+  "backend_image": "eceasy/cli-proxy-api:v8.0.31",
+  "ui": "Snow Console / 雪峰控制台 - 简洁版",
+  "production_deployed": false,
+  "no_oauth_api_proxy_or_ssh_credentials": true,
+  "no_3xui": true,
+  "cleanup_scope": "Frontend promotion/old-center/build-input cleanup; backend external requests unchanged.",
+  "ui_sha256": "2aede19af4624996f61a29d13bad5c543139abcd412c1da4e26bf1927f21556c"
+}

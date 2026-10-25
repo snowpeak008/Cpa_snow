@@ -1,0 +1,29 @@
+{
+  "version": "1.0.1",
+  "results": [
+    {
+      "path": "web/management.html",
+      "sha256": "2aede19af4624996f61a29d13bad5c543139abcd412c1da4e26bf1927f21556c",
+      "bytes": 2772237,
+      "scripts_parsed": 2,
+      "forbidden_matches": 0
+    },
+    {
+      "path": "web/panel-base.html",
+      "sha256": "b0122493b2923c273176dc8867bd8ad08feb0e51ac09f9995734d0f064904c21",
+      "bytes": 2760637,
+      "scripts_parsed": 2,
+      "forbidden_matches": 0
+    },
+    {
+      "path": "runtime\\panel\\management.html",
+      "sha256": "2aede19af4624996f61a29d13bad5c543139abcd412c1da4e26bf1927f21556c",
+      "bytes": 2772237,
+      "scripts_parsed": 2,
+      "forbidden_matches": 0
+    }
+  ],
+  "generated_pages_identical": true,
+  "old_build_inputs_absent": true,
+  "scope": "Static syntax and removal checks only; see browser-check.json for isolated UI behavior."
+}

@@ -1,0 +1,9 @@
+{
+  "version": "1.0.1",
+  "source": "web/panel-base.html",
+  "source_sha256": "b0122493b2923c273176dc8867bd8ad08feb0e51ac09f9995734d0f064904c21",
+  "output_sha256": "2aede19af4624996f61a29d13bad5c543139abcd412c1da4e26bf1927f21556c",
+  "referral_code_absent": true,
+  "production_deployed": false,
+  "boundary": "Cleaned five-section frontend only; backend image, authentication, routing and plugins unchanged."
+}

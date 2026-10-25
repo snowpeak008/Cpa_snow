@@ -17,3 +17,5 @@
 *.db-*
 .DS_Store
 
+# Local release archives
+/archives/

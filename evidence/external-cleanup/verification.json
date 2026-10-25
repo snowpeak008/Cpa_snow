@@ -1,0 +1,11 @@
+{
+  "version": "1.0.1",
+  "five_page_mock_ui": "pass",
+  "config_patch_save": "pass",
+  "config_core_ast_unchanged": true,
+  "production_deployed": false,
+  "historical_fixture_note": "Initial synthetic server did not implement PATCH and returned 403; fixture corrected, same frontend saved successfully.",
+  "scope": "Frontend promotion/old-center/build-input cleanup; backend external requests unchanged.",
+  "automated_build_guard": true,
+  "browser_tested_variant": "A.0.2; shared template, version label only differs"
+}
