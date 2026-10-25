@@ -1,0 +1,28 @@
+{
+  "version": "1.2.1-session-recovery",
+  "source_sha256": {
+    "limiter.go": "eeccdde4222b568191b4e9d02bd0ba9f8e1bdfd51fc1d203f2e937758664c0be",
+    "limiter_test.go": "817aa680749b4de4649824bbf9be5fcc4dba74db158ab3aafdfd4d81d68fc36c",
+    "main.go": "878a40dc90f07884f673f05e74bfabd29556e9668cf945db986deebde7b2083e",
+    "go.mod": "90b60d464c620cc5cfc7122079750f181ae6866b34190cc6e8d60eb086f199d5",
+    "go.sum": "e42794fa9b56301ad073de55cac1dea683b320ed951454d8709ffc7156088dd2",
+    "build.sh": "e98e62c9bca53a5240b4e8170b8429642b8168f66e201055d1c0cc031ba6b41d"
+  },
+  "production_binary_sha256": "34e3e2e967ab5b9b1e211373e50d7ae3a41d96744dc5720887dd7afdfad13b1e",
+  "builder": {
+    "Id": "sha256:1a6d4452c65dea36aac2e2d606b01b4a029ec90cc1ae53890540ce6173ea77ac",
+    "RepoTags": [
+      "golang:1.24-bookworm"
+    ],
+    "RepoDigests": [
+      "golang@sha256:1a6d4452c65dea36aac2e2d606b01b4a029ec90cc1ae53890540ce6173ea77ac"
+    ],
+    "Architecture": "amd64",
+    "Os": "linux"
+  },
+  "go_version": "1.24.13",
+  "platform": "linux/amd64",
+  "source_and_binary_match_prior_deployed_build_manifest": true,
+  "server_legacy_build_directory_matches": false,
+  "note": "Server legacy build working directory contains different files; archived source comes from the verified deployed build record."
+}

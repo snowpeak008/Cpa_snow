@@ -1,0 +1,31 @@
+{
+  "sensitive_data_scan": {
+    "files_scanned": 2211,
+    "bytes_scanned": 81247317,
+    "known_sensitive_values_checked": 56,
+    "matches": [],
+    "passed": true,
+    "secrets_exported": false,
+    "production_mutations": false
+  },
+  "deployment_template_checks": {
+    "management_key_consistent": true,
+    "fresh_client_key_consistent": true,
+    "global_proxy_empty": true,
+    "key_limit_5": true,
+    "core_session_affinity_false": true,
+    "request_log_false": true,
+    "five_libraries_copied": true,
+    "no_accounts_copied": true,
+    "refuse_overwrite": true,
+    "docker_compose_config_valid": true
+  },
+  "production_image_rebuilt": false,
+  "production_restarted": false,
+  "production_model_requests": 0,
+  "production_quota_refreshes": 0,
+  "runtime_binary_sha256_verified": true,
+  "core_source_export": "clean git archive at v8.0.31",
+  "custom_plugin_source": "matched the deployed build source manifest",
+  "third_party_sources": "release tag archives; no byte-identical rebuild claimed"
+}

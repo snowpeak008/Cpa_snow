@@ -1,0 +1,24 @@
+services:
+  cli-proxy-api:
+    image: eceasy/cli-proxy-api:v8.0.31@sha256:db1812ea5fc703ae228ef53e75e03f502211a2c9194cc2e8152000d4b974da74
+    platform: linux/amd64
+    pull_policy: missing
+    container_name: cli-proxy-api
+    environment:
+      DEPLOY: ${DEPLOY:-}
+      QUOTA_MONITOR_MGMT_URL: http://127.0.0.1:8317/v0
+      QUOTA_MONITOR_MGMT_KEY: ${CPA_MANAGEMENT_KEY:?Run prepare_deployment.py first}
+    ports:
+      - "${CPA_BIND_ADDRESS:-127.0.0.1}:${CPA_PORT:-8317}:8317"
+    volumes:
+      - ../runtime/panel:/CLIProxyAPI/static:ro
+      - ./config.yaml:/CLIProxyAPI/config.yaml
+      - ./state/auths:/root/.cli-proxy-api
+      - ./state/logs:/CLIProxyAPI/logs
+      - ./state/plugins:/CLIProxyAPI/plugins
+    restart: unless-stopped
+    logging:
+      driver: json-file
+      options:
+        max-size: 10m
+        max-file: "3"

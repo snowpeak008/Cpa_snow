@@ -1,0 +1,165 @@
+name: release
+
+on:
+  # Only release tags build. Tag runs restore caches from their own ref and main only, so after a Go
+  # version or scripts/darwin-amd64-go.sh change, run workflow_dispatch on main once to warm the toolchain cache.
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Version without leading v (workflow_dispatch builds artifacts only unless a tag is pushed)"
+        required: false
+
+permissions:
+  contents: write
+
+env:
+  PLUGIN_ID: live-routes
+  # Go 1.26's own floor. Left unset, the runner's SDK version becomes the minimum macOS.
+  MACOS_MIN: "12.0"
+  # Official CPA build the darwin/amd64 library is loaded into before it is published.
+  CPA_VERSION: "8.0.29"
+
+jobs:
+  build:
+    name: build ${{ matrix.goos }}/${{ matrix.goarch }}
+    runs-on: ${{ matrix.runner }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { goos: darwin, goarch: arm64, runner: macos-14, ext: dylib }
+          - { goos: darwin, goarch: amd64, runner: macos-15-intel, ext: dylib }
+          - { goos: linux, goarch: amd64, runner: ubuntu-latest, ext: so }
+          - { goos: linux, goarch: arm64, runner: ubuntu-24.04-arm, ext: so }
+          - { goos: windows, goarch: amd64, runner: windows-latest, ext: dll }
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: actions/setup-go@v6
+        with:
+          go-version-file: go.mod
+
+      - name: Resolve version
+        id: ver
+        run: |
+          if [ "${GITHUB_REF_TYPE}" = "tag" ]; then
+            v="${GITHUB_REF_NAME#v}"
+          elif [ -n "${{ github.event.inputs.version }}" ]; then
+            v="${{ github.event.inputs.version }}"
+          else
+            v="0.0.0-dev"
+          fi
+          echo "version=$v" >> "$GITHUB_OUTPUT"
+
+      - name: Test
+        run: go test ./...
+
+      # Stock Go shares TLS slot 6 with the Go host on darwin/amd64 and crashes CPA.
+      - name: Resolve Go version (darwin/amd64)
+        id: gover
+        if: matrix.goos == 'darwin' && matrix.goarch == 'amd64'
+        run: echo "v=$(go env GOVERSION)" >> "$GITHUB_OUTPUT"
+
+      # Building the toolchain takes about 6 minutes; it only changes with the Go version or the script.
+      - name: Cache patched Go toolchain (darwin/amd64)
+        if: matrix.goos == 'darwin' && matrix.goarch == 'amd64'
+        uses: actions/cache@v5
+        with:
+          path: ${{ runner.temp }}/tlsgo
+          key: tlsgo-${{ runner.os }}-${{ runner.arch }}-${{ steps.gover.outputs.v }}-${{ hashFiles('scripts/darwin-amd64-go.sh') }}
+
+      - name: Build patched Go toolchain (darwin/amd64)
+        if: matrix.goos == 'darwin' && matrix.goarch == 'amd64'
+        run: |
+          goroot=$(scripts/darwin-amd64-go.sh "$RUNNER_TEMP/tlsgo")
+          echo "BUILD_GOROOT=$goroot" >> "$GITHUB_ENV"
+
+      - name: Build plugin library
+        env:
+          CGO_ENABLED: "1"
+          GOOS: ${{ matrix.goos }}
+          GOARCH: ${{ matrix.goarch }}
+          CC: ${{ matrix.goos == 'windows' && 'gcc' || '' }}
+        run: |
+          mkdir -p out
+          if [ "$GOOS" = darwin ]; then
+            export MACOSX_DEPLOYMENT_TARGET="$MACOS_MIN"
+            export CGO_CFLAGS="-O2 -g -mmacosx-version-min=$MACOS_MIN" CGO_LDFLAGS="-mmacosx-version-min=$MACOS_MIN"
+          fi
+          if [ -n "${BUILD_GOROOT:-}" ]; then
+            export GOROOT="$BUILD_GOROOT" PATH="$BUILD_GOROOT/bin:$PATH" GOTOOLCHAIN=local
+          fi
+          go version
+          go build -trimpath -ldflags "-s -w" -buildmode=c-shared -o "out/${PLUGIN_ID}.${{ matrix.ext }}" . 2>&1 | tee build.log
+          test "${PIPESTATUS[0]}" = 0
+          if grep -q 'built for newer' build.log; then echo "objects target a macOS newer than $MACOS_MIN"; exit 1; fi
+          rm -f out/*.h
+          ls -l out
+
+      - name: Check darwin library
+        if: matrix.goos == 'darwin'
+        run: scripts/check-darwin.sh "out/${PLUGIN_ID}.dylib" "${{ matrix.goarch }}" "$MACOS_MIN"
+
+      # Native Intel runner: the full e2e suite against the official CPA darwin/amd64 build.
+      - name: Load into official CPA (darwin/amd64)
+        if: matrix.goos == 'darwin' && matrix.goarch == 'amd64'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          d="$RUNNER_TEMP/cpa"
+          mkdir -p "$d"
+          gh release download "v$CPA_VERSION" --repo router-for-me/CLIProxyAPI -D "$d" \
+            -p "CLIProxyAPI_${CPA_VERSION}_darwin_amd64.tar.gz" -p checksums.txt
+          (cd "$d" && grep " CLIProxyAPI_${CPA_VERSION}_darwin_amd64.tar.gz\$" checksums.txt | shasum -a 256 -c -)
+          tar -xzf "$d/CLIProxyAPI_${CPA_VERSION}_darwin_amd64.tar.gz" -C "$d" cli-proxy-api
+          CPA_BIN="$d/cli-proxy-api" PLUGIN_BIN="$PWD/out/${PLUGIN_ID}.dylib" bash scripts/e2e/run.sh
+
+      - name: Package
+        run: |
+          zipname="${PLUGIN_ID}_${{ steps.ver.outputs.version }}_${{ matrix.goos }}_${{ matrix.goarch }}.zip"
+          mkdir -p dist
+          if [ "${{ matrix.goos }}" = "windows" ]; then
+            powershell -NoProfile -Command "Compress-Archive -Path 'out/${PLUGIN_ID}.${{ matrix.ext }}' -DestinationPath 'dist/${zipname}'"
+          else
+            (cd out && zip -q "../dist/${zipname}" "${PLUGIN_ID}.${{ matrix.ext }}")
+          fi
+          ls -l dist
+
+      - uses: actions/upload-artifact@v6
+        with:
+          name: dist-${{ matrix.goos }}-${{ matrix.goarch }}
+          path: dist/*.zip
+          if-no-files-found: error
+
+  release:
+    name: publish release
+    needs: build
+    runs-on: ubuntu-latest
+    if: startsWith(github.ref, 'refs/tags/v')
+    steps:
+      - uses: actions/download-artifact@v7
+        with:
+          pattern: dist-*
+          path: dist
+          merge-multiple: true
+
+      - name: Write checksums
+        working-directory: dist
+        run: |
+          sha256sum *.zip > checksums.txt
+          cat checksums.txt
+
+      - name: Create GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "${GITHUB_REF_NAME}" dist/*.zip dist/checksums.txt \
+            --repo "${GITHUB_REPOSITORY}" \
+            --title "${GITHUB_REF_NAME}" \
+            --generate-notes

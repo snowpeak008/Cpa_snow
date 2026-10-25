@@ -1,0 +1,113 @@
+# CPA Usage
+
+**本地优先，轻量运行。** A local-first, lightweight **CLIProxyAPI plugin** for token usage analytics.
+
+- **本地优先**：用量数据保存在本机 SQLite，不上传第三方分析平台；插件仅随你的 CLIProxyAPI 运行。
+- **实时采集**：通过 `usage.handle` 插件回调，请求完成的瞬间写入数据库——无轮询、无队列窗口、不丢数据。
+- **零额外进程**：原生动态库（`.dylib` / `.so`）运行在 CPA 进程内，无需 Python、Node.js、Docker 或独立服务。
+- 真实 shadcn/ui 界面：Token 趋势、模型 / 匿名 Key / 请求明细与筛选。
+
+**状态：v0.2.0 / CLIProxyAPI 7.x / macOS 与 Linux。MIT 开源。**
+
+## 安装
+
+### 插件商店（推荐）
+
+1. 在 `cliproxyapi.conf` 中添加插件商店源与插件配置：
+
+```yaml
+plugins:
+  enabled: true
+  store-sources:
+    - "https://gist.githubusercontent.com/andyWang1688/dd3211dbf2af7e9c3c05f4319014ec99/raw/registry.json"
+  configs:
+    usage-report:
+      enabled: true
+      db_path: "~/.cli-proxy-api/usage-report/usage.sqlite"
+```
+
+2. 重启 CLIProxyAPI，打开管理面板 → **插件商店** → 找到 **CPA Usage Report** → 安装。
+3. 打开 **插件 → Usage Report**（或访问 `/v0/resource/plugins/usage-report/report`）。页面首次打开时会提示输入 **CPA 管理密钥**（保存在浏览器本地，用于访问受保护的插件 API）。
+
+> CPA 访问 GitHub API 查插件信息有匿名频率限制；若遇到 rate limit，可为 CPA 进程配置 `GITHUB_TOKEN` 环境变量，并在 `plugins.store-auth` 添加 `type: github-token`、`token-env: GITHUB_TOKEN` 的规则。
+
+### 手动安装（离线）
+
+从 [Releases](https://github.com/andyWang1688/cpa-usage/releases) 下载对应平台的 `usage-report_{version}_{goos}_{goarch}.zip`，解压后放入插件目录：
+
+```bash
+unzip usage-report_0.2.0_darwin_arm64.zip
+mkdir -p <plugins-dir>/darwin/arm64
+cp usage-report-v0.2.0.dylib <plugins-dir>/darwin/arm64/
+# Linux 为 .so，目录名相应为 linux/amd64 或 linux/arm64
+```
+
+或从源码构建：
+
+```sh
+cd plugin
+go build -buildmode=c-shared -o usage-report.dylib .   # macOS；Linux 产物为 .so
+```
+
+## 使用
+
+- 页面：`/v0/resource/plugins/usage-report/report`
+- 数据 API（需认证）：`/v0/management/plugins/usage-report/api/usage?start=YYYY-MM-DD&end=YYYY-MM-DD&bucket=day|hour|month`，请求头 `Authorization: Bearer <管理密钥>`
+- 任何经过该 CPA 实例的请求（Codex CLI、OpenCode、其他客户端）都会自动记录。
+
+界面能力：
+
+- 今天、近 7/30 天与自定义日期范围；模型筛选同时作用于 KPI、趋势和明细。
+- 缓存输入 / 净输入 / 输出堆叠趋势，小时 / 天 / 月粒度。
+- 模型、匿名 Key、请求三个视角；搜索、排序与分页。
+- 全部请求参与成功率统计，包括零 Token 失败；输入含缓存，输出含推理，不重复相加。
+- 错误、空数据与采集异常明确显示，不把空白或旧数据当实时成功。
+- 不预置价格，不把未知模型的用量伪装成实际账单。
+
+## 配置
+
+| 字段 | 说明 |
+|---|---|
+| `plugins.configs.usage-report.enabled` | 是否启用插件 |
+| `plugins.configs.usage-report.db_path` | SQLite 路径，默认 `~/.cli-proxy-api/usage-report/usage.sqlite` |
+| `plugins.store-sources` | 插件商店 registry 地址（安装/更新用） |
+
+## 数据与安全
+
+- 用量事件保存在 `db_path` 指向的本地 SQLite（表 `usage_events`），页面 API 在返回前将 Key 转换为稳定的匿名分组（`key-xxxxxxxxxx` 或 `未知 Key`）。
+- 原始事件仅保存在本地，可能包含客户端 Key；不要将数据库公开上传。
+- 插件的资源页面无独立鉴权，仅在 CPA 管理域内可达；请勿将 CPA 管理端口暴露到公网。
+
+## 开发
+
+```sh
+cd plugin
+GOPROXY=https://goproxy.cn,direct go test ./...       # 单元测试
+go build -buildmode=c-shared -o usage-report.dylib .  # macOS；Linux 为 .so
+```
+
+页面资源位于 `plugin/web/`，来自本仓库 `frontend/` 的构建产物：
+
+```sh
+cd frontend && npm ci && npm run build
+cp dist/index.html ../plugin/web/index.html
+cp dist/assets/* ../plugin/web/assets/
+```
+
+> 替换前端后需同步更新 `plugin/main.go` 中 embed 的文件名与 `management.register` 的资源路由（构建产物带 hash 文件名）。
+
+### 发布新版本
+
+版本号存于 `VERSION`，与 git tag（`v{version}`）一致。推送 tag 即触发 Release 流水线：五个平台（darwin/arm64、darwin/amd64、linux/amd64、linux/arm64、windows/amd64）构建插件并注入版本号、生成 `checksums.txt` 并发布 Release。
+
+```sh
+# 1. 更新 VERSION、CHANGELOG.md，提交并合并到 main
+# 2. 打 tag 推送，流水线自动发布
+git tag v0.3.4
+git push origin v0.3.4
+# 3. 更新插件商店 registry 中的 version 字段
+```
+
+## License
+
+[MIT](LICENSE)。界面组件基于 [shadcn/ui](https://github.com/shadcn-ui/ui)（MIT），见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。

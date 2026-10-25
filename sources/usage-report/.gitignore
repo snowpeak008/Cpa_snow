@@ -1,0 +1,16 @@
+.env
+config.env
+*.sqlite*
+*.db*
+*.log
+*.pid
+HANDOFF.md
+frontend/node_modules/
+frontend/dist/
+plugin/*.dylib
+plugin/*.so
+plugin/*.h
+dist/
+.DS_Store
+plugin/usage-report
+plugin/usage-report.test

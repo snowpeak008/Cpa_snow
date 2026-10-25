@@ -1,0 +1,90 @@
+name: Release
+on:
+  push:
+    tags: ['v*']
+permissions:
+  contents: read
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: macos-latest
+            goos: darwin
+            goarch: arm64
+            ext: dylib
+          - os: macos-latest
+            goos: darwin
+            goarch: amd64
+            ext: dylib
+            cc: "clang -arch x86_64"
+          - os: ubuntu-latest
+            goos: linux
+            goarch: amd64
+            ext: so
+          - os: ubuntu-24.04-arm
+            goos: linux
+            goarch: arm64
+            ext: so
+          - os: ubuntu-latest
+            goos: windows
+            goarch: amd64
+            ext: dll
+            cc: x86_64-w64-mingw32-gcc
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          fetch-depth: 0
+      - name: Validate release source
+        run: |
+          test "$GITHUB_REF_NAME" = "v$(cat VERSION)"
+          git merge-base --is-ancestor HEAD origin/main
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: plugin/go.mod
+          cache-dependency-path: plugin/go.sum
+      - name: Install mingw-w64 (windows cross build)
+        if: matrix.goos == 'windows'
+        run: sudo apt-get update && sudo apt-get install -y gcc-mingw-w64-x86-64
+      - name: Build and package plugin
+        working-directory: plugin
+        env:
+          CGO_ENABLED: "1"
+          GOOS: ${{ matrix.goos }}
+          GOARCH: ${{ matrix.goarch }}
+          CC: ${{ matrix.cc }}
+        run: |
+          VERSION="${GITHUB_REF_NAME#v}"
+          mkdir -p /tmp/plugin-release
+          go build -ldflags "-X main.version=${VERSION}" -buildmode=c-shared -o "/tmp/plugin-release/usage-report-v${VERSION}.${{ matrix.ext }}" .
+          cd /tmp/plugin-release
+          zip "usage-report_${VERSION}_${{ matrix.goos }}_${{ matrix.goarch }}.zip" "usage-report-v${VERSION}.${{ matrix.ext }}"
+          ls -la
+      - uses: actions/upload-artifact@v4
+        with:
+          name: plugin-${{ matrix.goos }}-${{ matrix.goarch }}
+          path: /tmp/plugin-release/usage-report_*.zip
+
+  publish:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - uses: actions/download-artifact@v4
+        with:
+          path: /tmp/plugin-release
+          merge-multiple: true
+      - name: Build checksums
+        run: |
+          cd /tmp/plugin-release
+          ls *.zip | sort | xargs shasum -a 256 > checksums.txt
+          cat checksums.txt
+      - name: Publish release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "$GITHUB_REF_NAME" /tmp/plugin-release/*.zip /tmp/plugin-release/checksums.txt --verify-tag --title "CPA Usage $GITHUB_REF_NAME" --generate-notes

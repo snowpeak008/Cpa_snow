@@ -1,0 +1,17 @@
+# Binaries and build outputs
+artifacts/
+dist/
+*.so
+*.dylib
+*.dll
+*.h
+!verification/loader.h
+*.test
+verification/native_smoke
+
+# OS and editor files
+.DS_Store
+*.swp
+*~
+.idea/
+.vscode/
