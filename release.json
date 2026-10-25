@@ -1,13 +1,15 @@
 {
-  "version": "A.0.1",
-  "branch": "A.0.1",
-  "base_commit": "96154f7650de914635db6327ca226c3a94587baf",
+  "version": "A.0.2",
+  "branch": "A.0.2",
+  "base_commit": "49ee02efc475b3ce5c8309aa7f00e2f41ed6c2c7",
   "backend_image": "eceasy/cli-proxy-api:v8.0.31",
   "ui": "Snow Console / 雪峰控制台 - 简洁版",
   "upstream_backup_name": "Snow-Console-20261025-v2.zip",
   "upstream_backup_sha256": "ab3b9815fab15fa97539ba483caab7d3e8644ce5833d86bea683f695d92758fb",
-  "ui_sha256": "5efcaf38e363bc2c6b2341e1723ceabb1d8dff612467bcd1925b1617c4bd2d72",
+  "ui_sha256": "a4ed85d9f7b61a5912dfddc916a9665e1d342146c3b9fcccb1b759d200f954d8",
   "format": "Unpacked complete portable backup; archives are recreated locally.",
   "no_oauth_api_proxy_or_ssh_credentials": true,
-  "no_3xui": true
+  "no_3xui": true,
+  "production_deployed": false,
+  "cleanup_scope": "Remove unused frontend promotion modules and links; backend image and plugins unchanged."
 }

@@ -11,7 +11,7 @@
   sha256:db1812ea5fc703ae228ef53e75e03f502211a2c9194cc2e8152000d4b974da74
 - account-concurrency 1.2.1-session-recovery、apikeys 0.5.1、live-routes 0.1.7、quota-monitor 0.2.1、usage-report 0.3.4。
 - Key 5 / 账号 2 的配置与定制插件。原生会话粘性配置仍为 false，粘性由该插件提供。
-- 两套网页静态文件：原始网页与 Snow Console。
+- 两个部署入口的网页静态文件均为同一清理后的 Snow Console，原始页面保存在 Git 历史。
 
 二、新服务器操作
 将整个文件夹传到新服务器，例如 /opt/snow-kit。以下命令只在新服务器执行。
@@ -54,7 +54,8 @@ docker compose -f docker-compose.yml -f docker-compose.snow.yml down
 若启动步骤失败后已经生成 .env/state，请保留它们；检查失败原因后手动使用上述 Compose 文件继续，
 不要为重新运行初始化而删除账号和状态。
 
-五、当前服务器网页回退（不重启服务）
+五、历史服务器网页回退（仅对应 2026-10-25 的哈希）
+A.0.2 没有部署，不能将以下历史命令当成本版回退。当前版本回退见“界面精简与回退.txt”。
 原页面在当前服务器：
 /opt/cpa/panel-backups/snow-console-20261025-before.html
 原页面 SHA256：

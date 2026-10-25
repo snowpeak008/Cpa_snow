@@ -1,0 +1,36 @@
+{
+  "version": "A.0.2",
+  "results": [
+    {
+      "path": "web/management.html",
+      "sha256": "a4ed85d9f7b61a5912dfddc916a9665e1d342146c3b9fcccb1b759d200f954d8",
+      "bytes": 2772237,
+      "scripts_parsed": 2,
+      "forbidden_matches": 0
+    },
+    {
+      "path": "web/panel-base.html",
+      "sha256": "b0122493b2923c273176dc8867bd8ad08feb0e51ac09f9995734d0f064904c21",
+      "bytes": 2760637,
+      "scripts_parsed": 2,
+      "forbidden_matches": 0
+    },
+    {
+      "path": "deployment\\runtime\\panel\\management.html",
+      "sha256": "a4ed85d9f7b61a5912dfddc916a9665e1d342146c3b9fcccb1b759d200f954d8",
+      "bytes": 2772237,
+      "scripts_parsed": 2,
+      "forbidden_matches": 0
+    },
+    {
+      "path": "deployment\\runtime\\snow-panel\\management.html",
+      "sha256": "a4ed85d9f7b61a5912dfddc916a9665e1d342146c3b9fcccb1b759d200f954d8",
+      "bytes": 2772237,
+      "scripts_parsed": 2,
+      "forbidden_matches": 0
+    }
+  ],
+  "generated_pages_identical": true,
+  "old_build_inputs_absent": true,
+  "scope": "Static syntax and removal checks only; see browser-check.json for isolated UI behavior."
+}

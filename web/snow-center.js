@@ -22,7 +22,7 @@ function qoe() {
         (0,H.jsx)('span', {className:'snow-connection '+(connected?'connected':''),children:connected?'已连接':connection==='connecting'?'连接中':'未连接'})
       ]}),
       (0,H.jsx)('dl', {className:'snow-center-details',children:[
-        ['管理入口',address],['登录状态',authenticated?'已登录':'未登录'],['界面版本','Snow 1.0 · 简洁版']
+        ['管理入口',address],['登录状态',authenticated?'已登录':'未登录'],['界面版本','Snow __SNOW_VERSION__ · 简洁版']
       ].map(([label,value])=>(0,H.jsxs)('div',{children:[(0,H.jsx)('dt',{children:label}),(0,H.jsx)('dd',{children:value})]},label))}),
       (0,H.jsxs)('div', {className:'snow-center-footer',children:[
         (0,H.jsx)('span', {children:'账号、配额和连接设置，在左侧统一管理。'}),

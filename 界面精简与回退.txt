@@ -1,46 +1,21 @@
-Snow Console 简洁版 — 修改与回退
-更新时间：2026-10-25 16:50:30（北京时间）
+Snow Console A.0.2 — 外链代码清理与回退
+日期：2026-10-26
 
-已部署到 /opt/cpa/panel/management.html。
-新页面 SHA256：5efcaf38e363bc2c6b2341e1723ceabb1d8dff612467bcd1925b1617c4bd2d72
-前一版 Snow SHA256：c9be8aeb7f96934e2e88e95ec4c465357bca0e6affb5037f97be338caacc19ab
+本版仅同步本地/Git，没有部署生产；旧版部署记录仅代表 2026-10-25 的历史操作。
 
-显示范围
-1. 主导航仅保留仪表盘、认证文件、配额管理、配置面板、中心信息。
-2. 中心信息：Snow Console／雪峰控制台、连接状态、管理入口、登录状态、Snow 界面版本。
-3. 隐藏原项目名称/Logo、服务端版本/构建信息、项目链接及检查更新按钮。
-4. 移除插件菜单、插件商店、动态插件页面、配额的 Plugin 分类、可视化插件设置及搜索结果。
-5. 移除模型服务、OAuth 登录、日志等独立页面入口及仪表盘快捷链接。
-   认证文件中的模型别名/禁用子页面保留。访问移除页面的旧地址会返回仪表盘。
-6. 配置保留可视化编辑；不提供原始 YAML 模式。差异确认只隐藏内部设置的显示，
-   原始配置加载、合并、保存函数保留原实现（构建记录有哈希校验）。
-7. 仪表盘运行概况不再显示含凭证的代理 URL、底层版本和构建日期。
+清理内容：删除推广服务组件、默认地址、表单和余额查询的死代码；删除 BestProxy 推荐组件；
+删除旧中心页与项目/帮助外链；删除运行时隐藏推广的 CSS/DOM 补丁。
+当前构建输入为 web/panel-base.html，不再读取上游原始 HTML。
+web/management.html、deployment/runtime/panel/management.html、deployment/runtime/snow-panel/management.html 同步一致。
 
-验证
-本地模拟管理服务：五个入口、七个配置分区、插件搜索为空、配置修改/差异确认、
-认证文件和配额页、六个旧地址跳转、桌面 1440×900 与手机 390×844 无横向溢出。
-未发现浏览器脚本错误，三个脚本语法检查通过。
-生产只读核对：HTTP 200，实际返回 HTML 哈希等于上述新版哈希。
-容器 ID、镜像 ID、启动时间、config.yaml 和 Compose 哈希前后完全一致。
-没有重启容器、改生产配置、改账号状态、替换插件或发送模型请求。
-配置编辑仅在本地模拟数据上预览并取消；没有在生产提交配置。
+验证：五页本地模拟管理服务可用；配置调试开关保存成功，PATCH 只提交指定字段，插件设置仍在；
+配置保存关键函数的 AST 与清理前一致；禁用推广项静态扫描无命中；未记录浏览器异常或外部连接尝试。
+这不证明全部后端/二进制不存在外部访问。模型/OAuth/配额接口、模型目录刷新和后端下载机制保留。
 
-证据
-本地构建：evidence/branding-build.json
-静态检查：evidence/simplification-static-check.json
-浏览器：evidence/simplification-browser-check.json
-服务器替换：evidence/panel-simplification-publication.json
-生产浏览器：evidence/simplification-production-browser.json
+回退（只生成旧版副本，不覆盖当前工作区、不操作服务器）：
+git archive A.0.1 -o ../Snow-A.0.1-rollback.zip
+或复制项目到另一目录后：git switch --detach A.0.1
+主分支旧版使用 1.0.0 tag。不得 force push 改写旧 tag。
 
-回退到上一版 Snow（恢复原来的完整菜单）
-服务器备份：/opt/cpa/panel-backups/snow-console-20261025-before-simplify.html
-本地副本：web/snow-before-simplify.html
-在 Windows PowerShell 进入本交付目录，执行：
-Get-Content -Raw .\web\rollback-simplified-panel.sh | & ssh.exe -i "$env:USERPROFILE\.ssh\bandwagon_codex" -o StrictHostKeyChecking=yes root@104.160.39.169 'bash -s -- --restore-previous-snow'
-脚本核对当前页面及备份 SHA256，原子恢复并检查实际 HTTP 内容；不重启服务。
-如需恢复最初的上游界面，使用 web/rollback-panel.sh，命令见“新服务器部署与回退.txt”。
-
-边界
-这是网页显示与导航精简，不是接口权限隔离。后台插件继续工作，管理 API 和技术标识未改。
-独立插件 URL、网络接口或源代码仍可能识别底层程序。后续更新上游页面需重新审查构建匹配。
-程序/脱敏配置备份同步更新为 v2，旧 ZIP 保留；未上传仓库，也未改 1.0.0 tag。
+生产当前未改变，无需执行生产回滚命令。此前 web/rollback-*.sh 仅适用于其硬编码哈希对应的历史部署，
+不是 A.0.2 的发布/回退入口；未来部署须重新核实当前页面及备份哈希。

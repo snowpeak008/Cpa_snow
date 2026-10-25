@@ -1,0 +1,25 @@
+{
+  "changes": [
+    "Remove referral translation objects: rl",
+    "Remove referral translation objects: il",
+    "Remove referral translation objects: al",
+    "Remove referral translation objects: ol",
+    "Remove referral translation objects: sl",
+    "Remove referral translation objects: cl",
+    "Remove promotional brand set",
+    "Remove promotional brands from provider options",
+    "Remove proxy referral component",
+    "Delete unmounted center implementation",
+    "Delete unreachable page references before dead code elimination",
+    "Remove OAuth signup promotion metadata",
+    "Remove OAuth signup promotion metadata",
+    "Remove OAuth signup promotion metadata",
+    "Remove OAuth signup promotion metadata",
+    "Remove OAuth signup promotion metadata",
+    "Remove sidebar balance classification",
+    "Remove dormant branded sidebar label"
+  ],
+  "before_bytes": 2922970,
+  "after_bytes": 2379370,
+  "remaining": []
+}
