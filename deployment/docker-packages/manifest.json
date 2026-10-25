@@ -1,0 +1,57 @@
+[
+  {
+    "Package": "docker-ce",
+    "Version": "5:29.9.1-1~ubuntu.22.04~jammy",
+    "Architecture": "amd64",
+    "Filename": "dists/jammy/pool/stable/amd64/docker-ce_29.9.1-1~ubuntu.22.04~jammy_amd64.deb",
+    "SHA256": "8ec2c2ad4b3bbac9bb9e1157911b1499b05377805335ba593874aa2ac15c552e",
+    "Size": "24569460",
+    "Depends": "containerd.io (>= 2.1.5), docker-ce-cli, iptables, nftables, libc6 (>= 2.34), libsystemd0",
+    "url": "https://download.docker.com/linux/ubuntu/dists/jammy/pool/stable/amd64/docker-ce_29.9.1-1~ubuntu.22.04~jammy_amd64.deb",
+    "relative_path": "docker-packages/ubuntu-22.04-amd64/docker-ce_29.9.1-1~ubuntu.22.04~jammy_amd64.deb"
+  },
+  {
+    "Package": "docker-ce-cli",
+    "Version": "5:29.9.1-1~ubuntu.22.04~jammy",
+    "Architecture": "amd64",
+    "Filename": "dists/jammy/pool/stable/amd64/docker-ce-cli_29.9.1-1~ubuntu.22.04~jammy_amd64.deb",
+    "SHA256": "8cfb11697163f535846e36c0d2905a8c90605ea383af9e8a2c6d7896f2105c86",
+    "Size": "17593528",
+    "Depends": "libc6 (>= 2.34)",
+    "url": "https://download.docker.com/linux/ubuntu/dists/jammy/pool/stable/amd64/docker-ce-cli_29.9.1-1~ubuntu.22.04~jammy_amd64.deb",
+    "relative_path": "docker-packages/ubuntu-22.04-amd64/docker-ce-cli_29.9.1-1~ubuntu.22.04~jammy_amd64.deb"
+  },
+  {
+    "Package": "containerd.io",
+    "Version": "2.4.2-2~ubuntu.22.04~jammy",
+    "Architecture": "amd64",
+    "Filename": "dists/jammy/pool/stable/amd64/containerd.io_2.4.2-2~ubuntu.22.04~jammy_amd64.deb",
+    "SHA256": "d14ab79a27f1e6f376d192ac340fea74efba2bee2e2a228a7aceece86e14a12b",
+    "Size": "23267604",
+    "Depends": "libc6 (>= 2.34), libseccomp2 (>= 2.5.0)",
+    "url": "https://download.docker.com/linux/ubuntu/dists/jammy/pool/stable/amd64/containerd.io_2.4.2-2~ubuntu.22.04~jammy_amd64.deb",
+    "relative_path": "docker-packages/ubuntu-22.04-amd64/containerd.io_2.4.2-2~ubuntu.22.04~jammy_amd64.deb"
+  },
+  {
+    "Package": "docker-buildx-plugin",
+    "Version": "0.38.0-1~ubuntu.22.04~jammy",
+    "Architecture": "amd64",
+    "Filename": "dists/jammy/pool/stable/amd64/docker-buildx-plugin_0.38.0-1~ubuntu.22.04~jammy_amd64.deb",
+    "SHA256": "a4c24830c1b1b3dc24d600968be2dec21d9c0af8bad29ab16c7fac8a44f83f51",
+    "Size": "17784172",
+    "Depends": null,
+    "url": "https://download.docker.com/linux/ubuntu/dists/jammy/pool/stable/amd64/docker-buildx-plugin_0.38.0-1~ubuntu.22.04~jammy_amd64.deb",
+    "relative_path": "docker-packages/ubuntu-22.04-amd64/docker-buildx-plugin_0.38.0-1~ubuntu.22.04~jammy_amd64.deb"
+  },
+  {
+    "Package": "docker-compose-plugin",
+    "Version": "5.6.0-1~ubuntu.22.04~jammy",
+    "Architecture": "amd64",
+    "Filename": "dists/jammy/pool/stable/amd64/docker-compose-plugin_5.6.0-1~ubuntu.22.04~jammy_amd64.deb",
+    "SHA256": "2389d885e90df60ef9dcee0e1fae16b70ffa392d6f29d742469aa8ea63eb1daa",
+    "Size": "8081228",
+    "Depends": null,
+    "url": "https://download.docker.com/linux/ubuntu/dists/jammy/pool/stable/amd64/docker-compose-plugin_5.6.0-1~ubuntu.22.04~jammy_amd64.deb",
+    "relative_path": "docker-packages/ubuntu-22.04-amd64/docker-compose-plugin_5.6.0-1~ubuntu.22.04~jammy_amd64.deb"
+  }
+]

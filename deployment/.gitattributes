@@ -1,0 +1,6 @@
+# Preserve the exact archived bytes and SHA256 values on every platform.
+* -text
+*.so -diff
+*.png -diff
+*.jpg -diff
+*.webp -diff

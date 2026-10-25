@@ -1,0 +1,27 @@
+{
+  "at_utc": "2026-10-25T08:35:27.423568+00:00",
+  "deployed": true,
+  "target": "/opt/cpa/panel/management.html",
+  "backup": "/opt/cpa/panel-backups/snow-console-20261025-before.html",
+  "before_sha256": "351c286e3a6bf986cb3d4a7763020c30fc8b8c8a97ee7455441b5badc647b4c2",
+  "after_sha256": "c9be8aeb7f96934e2e88e95ec4c465357bca0e6affb5037f97be338caacc19ab",
+  "served_sha256": "c9be8aeb7f96934e2e88e95ec4c465357bca0e6affb5037f97be338caacc19ab",
+  "http_status": 200,
+  "invariant_before": {
+    "config": "c3a39f134c3cc4d90e458c42c7d1ef29b6c78bd4b9e7c3f6afff80f3096f8217",
+    "compose": "18ab6de5d71feec09afa2ad9bdfca5b4a081acf835a5a11537d7e1e0075087c9",
+    "container_id": "9dbb4984f11cb21e92d037d3282cead26ffc0a206d1aa776b3390d17a5f0f22c",
+    "image": "sha256:db1812ea5fc703ae228ef53e75e03f502211a2c9194cc2e8152000d4b974da74",
+    "started_at": "2026-10-24T15:33:12.306953089Z"
+  },
+  "invariant_after": {
+    "config": "c3a39f134c3cc4d90e458c42c7d1ef29b6c78bd4b9e7c3f6afff80f3096f8217",
+    "compose": "18ab6de5d71feec09afa2ad9bdfca5b4a081acf835a5a11537d7e1e0075087c9",
+    "container_id": "9dbb4984f11cb21e92d037d3282cead26ffc0a206d1aa776b3390d17a5f0f22c",
+    "image": "sha256:db1812ea5fc703ae228ef53e75e03f502211a2c9194cc2e8152000d4b974da74",
+    "started_at": "2026-10-24T15:33:12.306953089Z"
+  },
+  "service_restarted": false,
+  "config_changed": false,
+  "model_requests_sent": 0
+}

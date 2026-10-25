@@ -1,0 +1,10 @@
+﻿{
+    "configuration":  true,
+    "start":  true,
+    "duplicate_start_did_not_duplicate":  true,
+    "tunnel_serves_existing_page":  true,
+    "stop_released_test_port":  true,
+    "repeat_stop_safe":  true,
+    "original_tunnel_unchanged":  true,
+    "login_boundary":  "SSH authentication verified by test tunnel; interactive terminal layout not automated."
+}

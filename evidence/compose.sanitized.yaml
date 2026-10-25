@@ -1,0 +1,23 @@
+services:
+  cli-proxy-api:
+    env_file:
+    - /opt/cpa/quota-monitor.env
+    image: eceasy/cli-proxy-api:v8.0.31
+    pull_policy: always
+    container_name: cli-proxy-api
+    environment:
+      DEPLOY: ${DEPLOY:-}
+    ports:
+    - 127.0.0.1:8317:8317
+    volumes:
+    - ./panel:/CLIProxyAPI/static:ro
+    - ${CLI_PROXY_CONFIG_PATH:-./config.yaml}:/CLIProxyAPI/config.yaml
+    - ${CLI_PROXY_AUTH_PATH:-./auths}:/root/.cli-proxy-api
+    - ${CLI_PROXY_LOG_PATH:-./logs}:/CLIProxyAPI/logs
+    - ${CLI_PROXY_PLUGIN_PATH:-./plugins}:/CLIProxyAPI/plugins
+    restart: unless-stopped
+    logging:
+      driver: json-file
+      options:
+        max-size: 10m
+        max-file: '3'

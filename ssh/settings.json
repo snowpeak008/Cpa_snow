@@ -1,0 +1,11 @@
+{
+  "Host": "104.160.39.169",
+  "User": "root",
+  "Port": 22,
+  "IdentityFile": "%USERPROFILE%\\.ssh\\bandwagon_codex",
+  "LocalPort": 18317,
+  "RemoteHost": "127.0.0.1",
+  "RemotePort": 8317,
+  "OpenBrowser": true,
+  "LegacySupervisor": "..\\..\\Start-CPA-Tunnel.ps1"
+}

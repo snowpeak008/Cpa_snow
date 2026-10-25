@@ -1,19 +1,25 @@
-# Deployment state and credentials must never enter this repository.
-/deploy/config.yaml
-/deploy/.env
-/deploy/state/
-/private/
-/backups/
-/auths/
-/logs/
+archives/
 **/__pycache__/
-*.pyc
-*.dpapi
+**/.state/
+**/runs/
+deployment/deploy/.env
+deployment/deploy/config.yaml
+deployment/deploy/state/
+evidence/restore-test/
+*.partial
+
+# Local-only credentials and runtime data, never versioned.
+**/.env
+**/.env.local
+**/deploy/state/
+**/private/
+**/auths/
+**/logs/
 *.pem
 *.key
+*.dpapi
 *.sqlite
 *.sqlite-*
 *.db
 *.db-*
-.DS_Store
-
+*.pyc

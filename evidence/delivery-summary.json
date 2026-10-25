@@ -1,0 +1,12 @@
+{
+  "archive": "archives/Snow-Console-20261025.zip",
+  "bytes": 209101693,
+  "sha256": "28b3dc8302196011ad8e188f51616ba228bdc0d8f031019e4b2bc334afd12236",
+  "files": 2277,
+  "zip_crc_check": true,
+  "deployment_manifest_files": 2225,
+  "oauth_credentials_included": false,
+  "api_keys_included": false,
+  "ssh_private_keys_included": false,
+  "vpn_3xui_included": false
+}

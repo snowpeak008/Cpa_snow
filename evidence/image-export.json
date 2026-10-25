@@ -1,0 +1,42 @@
+{
+  "file": "deployment\\images\\cpa-v8.0.31-linux-amd64.tar.gz",
+  "sha256": "b6031a0dace3ecf4393546f4e28f1ee0a43e421d735ae88339ec4c00377d7496",
+  "bytes": 76041963,
+  "uncompressed_bytes": 77026816,
+  "elapsed_seconds": 73.99,
+  "docker_manifest": [
+    {
+      "Config": "blobs/sha256/b35e4e90159cb14f2c35c1bec89bd6a923effb68b8081aef4ec94d20ef992224",
+      "RepoTags": [
+        "eceasy/cli-proxy-api:v8.0.31"
+      ],
+      "Layers": [
+        "blobs/sha256/8cb71386cfcfc55b27b559f73c6d5c0cdcb93b83be8281314116e271cc42cea6",
+        "blobs/sha256/99760c88d1269ccb96be0cd26818cdba0f92d615a2d4c62b7bfee1a08c0b4cf6",
+        "blobs/sha256/d777d60a22dc5769f8987f1b3ea9e5171429b756c69ad697017fed960c17c85b",
+        "blobs/sha256/415680454d18093577bed4c736d25d00af36c286ff3a9700aa6747cf2a159f11",
+        "blobs/sha256/d249922e68a3a4ac785243fcb7e79e658d66e30cdbb4fcde86a71fedd45d7f5e",
+        "blobs/sha256/4f4fb700ef54461cfa02571ae0db9a0dc1e0cdb5577484a6d75e68dc38e8acc1",
+        "blobs/sha256/9ab042b454ea683a321cc957b31f2ab4255fa9f71012174b7c0e23c0d2c291cf"
+      ]
+    }
+  ],
+  "oci_index": {
+    "schemaVersion": 2,
+    "mediaType": "application/vnd.oci.image.index.v1+json",
+    "manifests": [
+      {
+        "mediaType": "application/vnd.oci.image.index.v1+json",
+        "digest": "sha256:db1812ea5fc703ae228ef53e75e03f502211a2c9194cc2e8152000d4b974da74",
+        "size": 1609,
+        "annotations": {
+          "containerd.io/distribution.source.docker.io": "eceasy/cli-proxy-api",
+          "io.containerd.image.name": "docker.io/eceasy/cli-proxy-api:v8.0.31",
+          "org.opencontainers.image.ref.name": "v8.0.31"
+        }
+      }
+    ]
+  },
+  "tar_member_count": 18,
+  "production_action": "docker image save only; no container restart or image rebuild"
+}

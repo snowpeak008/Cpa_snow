@@ -1,0 +1,10 @@
+[
+  {
+    "script": "rollback-panel.sh",
+    "bash_syntax_ok": true
+  },
+  {
+    "script": "rollback-simplified-panel.sh",
+    "bash_syntax_ok": true
+  }
+]

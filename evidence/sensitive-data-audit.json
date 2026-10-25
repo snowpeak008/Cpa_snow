@@ -1,0 +1,10 @@
+{
+  "files_scanned": 2234,
+  "bytes_scanned": 84523645,
+  "known_sensitive_values_checked": 56,
+  "matches": [],
+  "passed": true,
+  "secrets_exported": false,
+  "production_mutations": false,
+  "excluded_binary_verification": "Image OCI blobs and official Docker deb packages verified separately by SHA256; UI screenshots checked visually."
+}

@@ -1,0 +1,19 @@
+# Deployment state and credentials must never enter this repository.
+/deploy/config.yaml
+/deploy/.env
+/deploy/state/
+/private/
+/backups/
+/auths/
+/logs/
+**/__pycache__/
+*.pyc
+*.dpapi
+*.pem
+*.key
+*.sqlite
+*.sqlite-*
+*.db
+*.db-*
+.DS_Store
+

@@ -1,0 +1,459 @@
+{
+  "source_sha256": "351c286e3a6bf986cb3d4a7763020c30fc8b8c8a97ee7455441b5badc647b4c2",
+  "output_sha256": "5efcaf38e363bc2c6b2341e1723ceabb1d8dff612467bcd1925b1617c4bd2d72",
+  "changes": [
+    {
+      "from": "CLI Proxy API Management Center",
+      "to": "Snow Console",
+      "count": 10
+    },
+    {
+      "from": "CLI Proxy API",
+      "to": "Snow Console",
+      "count": 78
+    },
+    {
+      "from": "CPA（Snow Console）",
+      "to": "服务端",
+      "count": 4
+    },
+    {
+      "from": "CLIProxyAPI 升级",
+      "to": "服务端升级",
+      "count": 2
+    },
+    {
+      "from": "CLIProxyAPI源",
+      "to": "服务端源",
+      "count": 1
+    },
+    {
+      "from": "abbr:`CPAMC`",
+      "to": "abbr:`Snow Console`",
+      "count": 6
+    },
+    {
+      "from": "alt:`CPAMC`",
+      "to": "alt:`Snow Console`",
+      "count": 2
+    },
+    {
+      "from": "alt:`CPAMC logo`",
+      "to": "alt:`Snow Console logo`",
+      "count": 1
+    },
+    {
+      "from": "brandWord,children:`CLI`",
+      "to": "brandWord,children:`Snow`",
+      "count": 1
+    },
+    {
+      "from": "brandWord,children:`PROXY`",
+      "to": "brandWord,children:`Console`",
+      "count": 1
+    },
+    {
+      "from": "brandWord,children:`API`",
+      "to": "brandWord,children:`雪峰控制台`",
+      "count": 1
+    },
+    {
+      "from": "theme:`auto`,resolvedTheme:`light`,setTheme:",
+      "to": "theme:`dark`,resolvedTheme:`dark`,setTheme:",
+      "count": 1
+    },
+    {
+      "from": "连接 Snow Console v8 或更高版本",
+      "to": "登录雪峰控制台，管理你的服务与连接",
+      "count": 1
+    },
+    {
+      "from": "Snow Console 管理控制台",
+      "to": "雪峰控制台",
+      "count": 2
+    },
+    {
+      "from": "Snow Console 版本",
+      "to": "服务端版本",
+      "count": 2
+    },
+    {
+      "from": "Snow Console 核心程序源代码",
+      "to": "底层服务源代码",
+      "count": 1
+    },
+    {
+      "from": "AI 提供商",
+      "to": "模型服务",
+      "count": 3
+    },
+    {
+      "from": "OAuth 登录",
+      "to": "连接账号",
+      "count": 7
+    },
+    {
+      "from": "静候流量",
+      "to": "运行总览",
+      "count": 1
+    },
+    {
+      "from": "管理供应商",
+      "to": "管理连接",
+      "count": 1
+    },
+    {
+      "from": "版本详情与管理中心信息。",
+      "to": "连接状态与控制台概况。",
+      "count": 1
+    },
+    {
+      "from": "请求头伪装、签名缓存、插件源等不常修改的设置",
+      "to": "请求头与提供商行为等进阶设置",
+      "count": 1
+    },
+    {
+      "from": "用于面板更新、插件下载等服务端 GitHub 请求。优先于 GITHUB_TOKEN；留空时使用环境变量凭据，未设置凭据则匿名请求。插件商店匹配的认证规则优先。",
+      "to": "用于服务端 GitHub 资源请求。优先于 GITHUB_TOKEN；留空时使用环境变量凭据，未设置凭据则匿名请求。",
+      "count": 1
+    },
+    {
+      "from": "请更新 CPA 版本或检查更新",
+      "to": "请更新 Snow Console 版本或检查更新",
+      "count": 1
+    },
+    {
+      "from": "当前 CPA 版本不支持 OAuth 模型禁用，请升级 CPA 版本",
+      "to": "当前 Snow Console 版本不支持 OAuth 模型禁用，请升级 Snow Console 版本",
+      "count": 1
+    },
+    {
+      "from": "需要升级 CPA 版本",
+      "to": "需要升级 Snow Console 版本",
+      "count": 1
+    },
+    {
+      "from": "当前 CPA 版本不支持获取模型列表（仍可手动输入）。",
+      "to": "当前 Snow Console 版本不支持获取模型列表（仍可手动输入）。",
+      "count": 1
+    },
+    {
+      "from": "当前 CPA 版本不支持模型别名功能，请升级 CPA 版本",
+      "to": "当前 Snow Console 版本不支持模型别名功能，请升级 Snow Console 版本",
+      "count": 1
+    },
+    {
+      "from": "需要升级 CPA 版本",
+      "to": "需要升级 Snow Console 版本",
+      "count": 1
+    },
+    {
+      "from": "当前连接的是 CPA，日志查看需要先开启“日志记录到文件”。",
+      "to": "当前连接的是 Snow Console，日志查看需要先开启“日志记录到文件”。",
+      "count": 1
+    },
+    {
+      "from": "CPA 的日志接口读取本地日志文件。请在配置中开启 logging-to-file 后再刷新查看。",
+      "to": "Snow Console 的日志接口读取本地日志文件。请在配置中开启 logging-to-file 后再刷新查看。",
+      "count": 1
+    },
+    {
+      "from": "請更新 CPA 版本或檢查更新",
+      "to": "請更新 Snow Console 版本或檢查更新",
+      "count": 1
+    },
+    {
+      "from": "找不到 v8 Management API，請檢查服務位址並將 CLIProxyAPI 升級至 v8 或更新版本；不再支援 v0 介面。",
+      "to": "找不到 v8 Management API，請檢查服務位址並將 Snow Console 升級至 v8 或更新版本；不再支援 v0 介面。",
+      "count": 1
+    },
+    {
+      "from": "目前後端可使用 v0 管理介面，但不支援 v8。請將 CLIProxyAPI 升級至 v8 或更新版本後再使用此管理頁面。",
+      "to": "目前後端可使用 v0 管理介面，但不支援 v8。請將 Snow Console 升級至 v8 或更新版本後再使用此管理頁面。",
+      "count": 1
+    },
+    {
+      "from": "目前 CPA 版本不支援 OAuth 模型停用，請升級 CPA 版本",
+      "to": "目前 Snow Console 版本不支援 OAuth 模型停用，請升級 Snow Console 版本",
+      "count": 1
+    },
+    {
+      "from": "需要升級 CPA 版本",
+      "to": "需要升級 Snow Console 版本",
+      "count": 1
+    },
+    {
+      "from": "目前 CPA 版本不支援取得模型清單（仍可手動輸入）。",
+      "to": "目前 Snow Console 版本不支援取得模型清單（仍可手動輸入）。",
+      "count": 1
+    },
+    {
+      "from": "目前 CPA 版本不支援模型別名功能，請升級 CPA 版本",
+      "to": "目前 Snow Console 版本不支援模型別名功能，請升級 Snow Console 版本",
+      "count": 1
+    },
+    {
+      "from": "需要升級 CPA 版本",
+      "to": "需要升級 Snow Console 版本",
+      "count": 1
+    },
+    {
+      "from": "目前連線的是 CPA，記錄檢視需要先開啟「記錄到檔案」。",
+      "to": "目前連線的是 Snow Console，記錄檢視需要先開啟「記錄到檔案」。",
+      "count": 1
+    },
+    {
+      "from": "CPA 的記錄介面會讀取本機記錄檔。請在設定中開啟 logging-to-file 後再重新整理查看。",
+      "to": "Snow Console 的記錄介面會讀取本機記錄檔。請在設定中開啟 logging-to-file 後再重新整理查看。",
+      "count": 1
+    },
+    {
+      "from": "CLIProxyAPI來源",
+      "to": "Snow Console來源",
+      "count": 1
+    },
+    {
+      "from": "Please update the CPA version or check for updates",
+      "to": "Please update the Snow Console version or check for updates",
+      "count": 1
+    },
+    {
+      "from": "v8 Management API not found. Check the server address and upgrade CLIProxyAPI to v8 or later; v0 is not supported.",
+      "to": "v8 Management API not found. Check the server address and upgrade Snow Console to v8 or later; v0 is not supported.",
+      "count": 1
+    },
+    {
+      "from": "This backend accepts v0 Management API but does not provide v8. Upgrade CLIProxyAPI to v8 or later to use this management page.",
+      "to": "This backend accepts v0 Management API but does not provide v8. Upgrade Snow Console to v8 or later to use this management page.",
+      "count": 1
+    },
+    {
+      "from": "Current CPA version does not support OAuth model disablement. Please upgrade.",
+      "to": "Current Snow Console version does not support OAuth model disablement. Please upgrade.",
+      "count": 1
+    },
+    {
+      "from": "The current server version does not support fetching OAuth model disablement. Please upgrade to the latest CPA (Snow Console) version and try again.",
+      "to": "The current server version does not support fetching OAuth model disablement. Please upgrade to the latest Snow Console version and try again.",
+      "count": 1
+    },
+    {
+      "from": "The current CPA version does not support fetching model lists (manual input still works).",
+      "to": "The current Snow Console version does not support fetching model lists (manual input still works).",
+      "count": 1
+    },
+    {
+      "from": "This feature requires a newer Snow Console (CPA) version. Please upgrade.",
+      "to": "This feature requires a newer Snow Console version. Please upgrade.",
+      "count": 1
+    },
+    {
+      "from": "The current server does not support the OAuth model aliases API. Please upgrade to the latest Snow Console (CPA) version.",
+      "to": "The current server does not support the OAuth model aliases API. Please upgrade to the latest Snow Console version.",
+      "count": 1
+    },
+    {
+      "from": "The connected runtime is CPA. Log viewing requires logging to file to be enabled first.",
+      "to": "The connected runtime is Snow Console. Log viewing requires logging to file to be enabled first.",
+      "count": 1
+    },
+    {
+      "from": "CPA reads this log view from local log files. Enable logging-to-file in the config, then refresh.",
+      "to": "Snow Console reads this log view from local log files. Enable logging-to-file in the config, then refresh.",
+      "count": 1
+    },
+    {
+      "from": "CLIProxyAPI source",
+      "to": "Snow Console source",
+      "count": 1
+    },
+    {
+      "from": "Пожалуйста, обновите CPA или проверьте наличие обновлений",
+      "to": "Пожалуйста, обновите Snow Console или проверьте наличие обновлений",
+      "count": 1
+    },
+    {
+      "from": "Management API v8 не найден. Проверьте адрес сервера и обновите CLIProxyAPI до v8 или новее; API v0 не поддерживается.",
+      "to": "Management API v8 не найден. Проверьте адрес сервера и обновите Snow Console до v8 или новее; API v0 не поддерживается.",
+      "count": 1
+    },
+    {
+      "from": "Этот сервер поддерживает Management API v0, но не v8. Обновите CLIProxyAPI до v8 или новее, чтобы использовать эту страницу управления.",
+      "to": "Этот сервер поддерживает Management API v0, но не v8. Обновите Snow Console до v8 или новее, чтобы использовать эту страницу управления.",
+      "count": 1
+    },
+    {
+      "from": "Текущая версия CPA не поддерживает отключение OAuth-моделей. Пожалуйста, обновите систему.",
+      "to": "Текущая версия Snow Console не поддерживает отключение OAuth-моделей. Пожалуйста, обновите систему.",
+      "count": 1
+    },
+    {
+      "from": "Текущая версия сервера не поддерживает получение отключения OAuth-моделей. Обновите CPA (Snow Console) до последней версии и повторите попытку.",
+      "to": "Текущая версия сервера не поддерживает получение отключения OAuth-моделей. Обновите Snow Console до последней версии и повторите попытку.",
+      "count": 1
+    },
+    {
+      "from": "Текущая версия CPA не поддерживает загрузку списка моделей (ручной ввод остаётся доступным).",
+      "to": "Текущая версия Snow Console не поддерживает загрузку списка моделей (ручной ввод остаётся доступным).",
+      "count": 1
+    },
+    {
+      "from": "Эта функция требует более новой версии Snow Console (CPA). Обновите систему.",
+      "to": "Эта функция требует более новой версии Snow Console. Обновите систему.",
+      "count": 1
+    },
+    {
+      "from": "Текущая версия сервера не поддерживает API псевдонимов моделей OAuth. Обновите Snow Console (CPA) до последней версии.",
+      "to": "Текущая версия сервера не поддерживает API псевдонимов моделей OAuth. Обновите Snow Console до последней версии.",
+      "count": 1
+    },
+    {
+      "from": "Подключён режим CPA. Для просмотра журналов сначала включите запись журналов в файл.",
+      "to": "Подключён режим Snow Console. Для просмотра журналов сначала включите запись журналов в файл.",
+      "count": 1
+    },
+    {
+      "from": "CPA читает этот журнал из локальных файлов. Включите logging-to-file в конфигурации и обновите страницу.",
+      "to": "Snow Console читает этот журнал из локальных файлов. Включите logging-to-file в конфигурации и обновите страницу.",
+      "count": 1
+    },
+    {
+      "from": "Источник CLIProxyAPI",
+      "to": "Источник Snow Console",
+      "count": 1
+    },
+    {
+      "from": "Vui lòng cập nhật phiên bản CPA hoặc kiểm tra bản cập nhật",
+      "to": "Vui lòng cập nhật phiên bản Snow Console hoặc kiểm tra bản cập nhật",
+      "count": 1
+    },
+    {
+      "from": "Không tìm thấy Management API, hãy xác nhận địa chỉ máy chủ trỏ đến backend CLIProxyAPI",
+      "to": "Không tìm thấy Management API, hãy xác nhận địa chỉ máy chủ trỏ đến backend Snow Console",
+      "count": 1
+    },
+    {
+      "from": "Backend này chấp nhận Management API v0 nhưng không cung cấp v8. Vui lòng nâng cấp CLIProxyAPI lên v8 hoặc mới hơn để sử dụng trang quản lý này.",
+      "to": "Backend này chấp nhận Management API v0 nhưng không cung cấp v8. Vui lòng nâng cấp Snow Console lên v8 hoặc mới hơn để sử dụng trang quản lý này.",
+      "count": 1
+    },
+    {
+      "from": "Phiên bản CPA hiện tại không hỗ trợ vô hiệu hóa model OAuth. Vui lòng nâng cấp.",
+      "to": "Phiên bản Snow Console hiện tại không hỗ trợ vô hiệu hóa model OAuth. Vui lòng nâng cấp.",
+      "count": 1
+    },
+    {
+      "from": "Phiên bản máy chủ hiện tại không hỗ trợ lấy danh sách vô hiệu hóa model OAuth. Vui lòng nâng cấp lên phiên bản CPA (Snow Console) mới nhất và thử lại.",
+      "to": "Phiên bản máy chủ hiện tại không hỗ trợ lấy danh sách vô hiệu hóa model OAuth. Vui lòng nâng cấp lên phiên bản Snow Console mới nhất và thử lại.",
+      "count": 1
+    },
+    {
+      "from": "Phiên bản CPA hiện tại không hỗ trợ lấy danh sách model (vẫn có thể nhập thủ công).",
+      "to": "Phiên bản Snow Console hiện tại không hỗ trợ lấy danh sách model (vẫn có thể nhập thủ công).",
+      "count": 1
+    },
+    {
+      "from": "Tính năng này yêu cầu phiên bản Snow Console (CPA) mới hơn. Vui lòng nâng cấp.",
+      "to": "Tính năng này yêu cầu phiên bản Snow Console mới hơn. Vui lòng nâng cấp.",
+      "count": 1
+    },
+    {
+      "from": "Máy chủ hiện tại không hỗ trợ API bí danh model OAuth. Vui lòng nâng cấp lên phiên bản Snow Console (CPA) mới nhất.",
+      "to": "Máy chủ hiện tại không hỗ trợ API bí danh model OAuth. Vui lòng nâng cấp lên phiên bản Snow Console mới nhất.",
+      "count": 1
+    },
+    {
+      "from": "Runtime đang kết nối là CPA. Xem log yêu cầu bật ghi log ra file trước.",
+      "to": "Runtime đang kết nối là Snow Console. Xem log yêu cầu bật ghi log ra file trước.",
+      "count": 1
+    },
+    {
+      "from": "CPA đọc khung xem log này từ file log cục bộ. Hãy bật logging-to-file trong cấu hình rồi làm mới.",
+      "to": "Snow Console đọc khung xem log này từ file log cục bộ. Hãy bật logging-to-file trong cấu hình rồi làm mới.",
+      "count": 1
+    },
+    {
+      "from": "Nguồn CLIProxyAPI",
+      "to": "Nguồn Snow Console",
+      "count": 1
+    },
+    {
+      "from": "CPA 버전을 업데이트하거나 업데이트를 확인하세요",
+      "to": "Snow Console 버전을 업데이트하거나 업데이트를 확인하세요",
+      "count": 1
+    },
+    {
+      "from": "v8 관리 API를 찾을 수 없습니다. 서버 주소를 확인하고 CLIProxyAPI를 v8 이상으로 업그레이드하세요. v0은 지원되지 않습니다.",
+      "to": "v8 관리 API를 찾을 수 없습니다. 서버 주소를 확인하고 Snow Console를 v8 이상으로 업그레이드하세요. v0은 지원되지 않습니다.",
+      "count": 1
+    },
+    {
+      "from": "이 백엔드는 v0 관리 API를 허용하지만 v8을 제공하지 않습니다. 이 관리 페이지를 사용하려면 CLIProxyAPI를 v8 이상으로 업그레이드하세요.",
+      "to": "이 백엔드는 v0 관리 API를 허용하지만 v8을 제공하지 않습니다. 이 관리 페이지를 사용하려면 Snow Console를 v8 이상으로 업그레이드하세요.",
+      "count": 1
+    },
+    {
+      "from": "현재 CPA 버전에서는 OAuth 모델 비활성화를 지원하지 않습니다. 업그레이드하세요.",
+      "to": "현재 Snow Console 버전에서는 OAuth 모델 비활성화를 지원하지 않습니다. 업그레이드하세요.",
+      "count": 1
+    },
+    {
+      "from": "현재 서버 버전은 OAuth 모델 비활성화 조회를 지원하지 않습니다. 최신 CPA(Snow Console) 버전으로 업그레이드한 후 다시 시도하세요.",
+      "to": "현재 서버 버전은 OAuth 모델 비활성화 조회를 지원하지 않습니다. 최신 Snow Console 버전으로 업그레이드한 후 다시 시도하세요.",
+      "count": 1
+    },
+    {
+      "from": "현재 CPA 버전은 모델 목록 가져오기를 지원하지 않습니다(수동 입력은 가능).",
+      "to": "현재 Snow Console 버전은 모델 목록 가져오기를 지원하지 않습니다(수동 입력은 가능).",
+      "count": 1
+    },
+    {
+      "from": "이 기능은 최신 버전의 Snow Console(CPA)가 필요합니다. 업그레이드하세요.",
+      "to": "이 기능은 최신 버전의 Snow Console가 필요합니다. 업그레이드하세요.",
+      "count": 1
+    },
+    {
+      "from": "현재 서버는 OAuth 모델 별칭 API를 지원하지 않습니다. 최신 버전의 Snow Console(CPA)로 업그레이드하세요.",
+      "to": "현재 서버는 OAuth 모델 별칭 API를 지원하지 않습니다. 최신 버전의 Snow Console로 업그레이드하세요.",
+      "count": 1
+    },
+    {
+      "from": "CLIProxyAPI 소스",
+      "to": "Snow Console 소스",
+      "count": 1
+    }
+  ],
+  "simplification": {
+    "changes": [
+      "Five sections; removed UI routes fall back to dashboard",
+      "Filter core and dynamic sidebar menus",
+      "Do not fetch plugin menus from the simplified shell",
+      "Restrict dashboard shortcuts",
+      "Primary dashboard action opens authentication files",
+      "Secondary dashboard action opens quotas",
+      "Hide backend version in dashboard heading",
+      "Dashboard summary omits backend version, build and proxy credential URL",
+      "Remove removed-section shortcut from authentication empty state",
+      "Omit plugin-specific quota entries from presentation",
+      "Clear remembered hidden quota tab in this UI only",
+      "Hide plugin quota category",
+      "Simple center component without upstream identity, update controls or project links",
+      "Remove plugin settings accordion",
+      "Exclude plugin settings from visual field search",
+      "Count only visible configuration fields",
+      "Ignore deep links into hidden settings",
+      "Always open visual configuration editor",
+      "Remove raw YAML mode selector",
+      "Parse errors remain errors instead of displaying raw configuration",
+      "Hide internal configuration in display-only diff, preserve actual save inputs",
+      "Preserve Snow favicon at runtime"
+    ],
+    "configuration_save_hook_hashes": {
+      "function ZV(": "965f64f6539c0516fec4d21350aaeb6c92d1c39c7355c01fc6bf49ab84c38bb7",
+      "function mV(": "500fa215eb80b5cfa24732332c2a69c87751d5b1a455e06d0a6671f0dbba4558"
+    }
+  },
+  "api_marker_counts_unchanged": true,
+  "production_deployed": false,
+  "boundary": "Presentation changes only. Core protocol, auth, quota, account routing and provider logos unchanged."
+}

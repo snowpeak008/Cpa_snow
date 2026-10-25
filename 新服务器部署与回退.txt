@@ -1,0 +1,77 @@
+新服务器部署与回退
+
+一、适用范围
+新 Linux amd64 服务器。推荐使用与原机一致的 Ubuntu 22.04。
+原机记录：Ubuntu 22.04.5、Docker Engine 29.9.1、Compose 5.6.0。
+原机只有约 1 GiB 内存；本流程用于新服务器恢复，不是在原机加开第二个实例。
+
+包中包含：
+- Docker Engine、CLI、containerd、buildx、Compose 五个精确版本的 .deb 包及官方 SHA256。
+- eceasy/cli-proxy-api:v8.0.31 镜像归档，约 76 MB，索引 digest：
+  sha256:db1812ea5fc703ae228ef53e75e03f502211a2c9194cc2e8152000d4b974da74
+- account-concurrency 1.2.1-session-recovery、apikeys 0.5.1、live-routes 0.1.7、quota-monitor 0.2.1、usage-report 0.3.4。
+- Key 5 / 账号 2 的配置与定制插件。原生会话粘性配置仍为 false，粘性由该插件提供。
+- 两套网页静态文件：原始网页与 Snow Console。
+
+二、新服务器操作
+将整个文件夹传到新服务器，例如 /opt/snow-kit。以下命令只在新服务器执行。
+
+cd /opt/snow-kit/deployment
+python3 scripts/verify_portable.py
+
+如果是全新 Ubuntu 22.04 amd64、尚未装 Docker：
+sudo bash scripts/install-docker-ubuntu.sh --install
+
+这个脚本拒绝替换已有 Docker，也不会自动卸载冲突软件。
+Docker 程序从本包中的 .deb 安装；apt 可能需要联网补充 Ubuntu 基础依赖。
+如果缺少 Python 3，先通过新系统的软件包管理器安装 python3。
+其他发行版/Ubuntu 版本请按 Docker 官方文档安装，不要强装本包的 Jammy .deb。
+
+然后执行：
+sudo bash scripts/deploy-new-server.sh --start
+
+此脚本校验文件，导入本地镜像，创建全新的管理密钥与客户端 Key，再启动容器。
+不会从注册表自动更新镜像；不会复制旧账号或旧密钥；遇到已有容器/状态会停止。
+新密钥保存在 deployment/deploy/.env 中，仅在新服务器私下查看，不要发到聊天或提交仓库。
+端口仅监听新服务器 127.0.0.1:8317，需要 SSH 通道访问。
+
+三、连接新服务器
+在 Windows 的 ssh/settings.json 中设置新服务器 Host、User、Port、IdentityFile。
+先核对新服务器 SSH 指纹，准备对应私钥；备份没有包含私钥。
+双击 02-启动SSH通道.cmd，打开管理界面，用新 .env 中的 CPA_MANAGEMENT_KEY 登录。
+导入账号 → 给每个账号绑定代理 → 核对账号启用状态 → 通过服务器启动日志核对插件注册和 Key 5 / 账号 2。主控制台已隐藏插件信息。
+Quota Monitor 本身会按插件逻辑查询额度；这不代表部署脚本发送了模型请求。
+
+四、日常操作（新部署目录）
+cd /opt/snow-kit/deployment/deploy
+docker compose -f docker-compose.yml -f docker-compose.snow.yml ps
+docker compose -f docker-compose.yml -f docker-compose.snow.yml logs --tail=100 cli-proxy-api
+
+停止本套新部署并保留所有状态：
+docker compose -f docker-compose.yml -f docker-compose.snow.yml down
+
+这里不要加 -v，不会删除 deploy/state。请在正确目录执行，避免操作其他项目。
+若启动步骤失败后已经生成 .env/state，请保留它们；检查失败原因后手动使用上述 Compose 文件继续，
+不要为重新运行初始化而删除账号和状态。
+
+五、当前服务器网页回退（不重启服务）
+原页面在当前服务器：
+/opt/cpa/panel-backups/snow-console-20261025-before.html
+原页面 SHA256：
+351c286e3a6bf986cb3d4a7763020c30fc8b8c8a97ee7455441b5badc647b4c2
+
+在 Windows PowerShell 中进入本交付目录，然后执行：
+Get-Content -Raw .\web\rollback-panel.sh | & ssh.exe -i "$env:USERPROFILE\.ssh\bandwagon_codex" -o StrictHostKeyChecking=yes root@104.160.39.169 'bash -s -- --restore-original'
+
+脚本会校验备份和当前页面哈希，以原子替换恢复旧页，并检查 HTTP 返回内容。
+如果页面此后又被修改，脚本拒绝覆盖。不会重启容器，也不会修改账号、配置和插件。
+
+六、备份限制
+不是整盘镜像，不包含 Nginx 站点、TLS 私钥、系统用户、防火墙、SSH 私钥和 3x-ui/Xray/VPN。
+不包含账号、代理凭证、API Key Manager 数据库、使用记录或插件内存中的会话绑定。
+可复制的是程序、脱敏部署结构和操作流程；恢复后的账号/凭证需要重新配置。
+已进行校验及配置验证，但没有另购服务器执行完整恢复演练。
+
+官方参考
+https://docs.docker.com/engine/install/ubuntu/
+https://docs.docker.com/reference/cli/docker/image/save/

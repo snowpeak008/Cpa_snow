@@ -1,0 +1,73 @@
+{
+  "checks": [
+    {
+      "menu": "模型服务",
+      "snapshotHasContent": true,
+      "layout": {
+        "h1": [
+          "管理控制台信息",
+          "模型服务"
+        ],
+        "horizontalOverflow": false,
+        "title": "Snow Console"
+      }
+    },
+    {
+      "menu": "连接账号",
+      "snapshotHasContent": true,
+      "layout": {
+        "h1": [
+          "模型服务",
+          "连接账号"
+        ],
+        "horizontalOverflow": false,
+        "title": "Snow Console"
+      }
+    },
+    {
+      "menu": "网关设置",
+      "snapshotHasContent": true,
+      "layout": {
+        "h1": [
+          "网关设置"
+        ],
+        "horizontalOverflow": false,
+        "title": "Snow Console"
+      }
+    },
+    {
+      "menu": "插件管理",
+      "snapshotHasContent": true,
+      "layout": {
+        "h1": [
+          "网关设置",
+          "插件管理"
+        ],
+        "horizontalOverflow": false,
+        "title": "Snow Console"
+      }
+    },
+    {
+      "menu": "工作台",
+      "snapshotHasContent": true,
+      "layout": {
+        "h1": [
+          "插件管理",
+          "运行总览。"
+        ],
+        "horizontalOverflow": false,
+        "title": "Snow Console"
+      }
+    },
+    {
+      "viewport": "390x844",
+      "layout": {
+        "horizontalOverflow": false,
+        "loginButtons": 1
+      }
+    }
+  ],
+  "consoleErrors": [],
+  "backend": "loopback mock only",
+  "productionWrites": false
+}

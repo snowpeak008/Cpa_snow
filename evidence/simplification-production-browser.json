@@ -1,0 +1,13 @@
+{
+  "center": true,
+  "nav": [
+    "仪表盘",
+    "认证文件",
+    "配额管理",
+    "配置面板",
+    "中心信息"
+  ],
+  "noUnwantedText": true,
+  "status": "已连接",
+  "title": "Snow Console"
+}

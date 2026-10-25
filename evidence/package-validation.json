@@ -1,0 +1,36 @@
+{
+  "image_blob_hashes": {
+    "passed": true,
+    "count": 13
+  },
+  "docker_packages": {
+    "passed": true,
+    "count": 5
+  },
+  "live_plugin_hashes": {
+    "passed": true,
+    "count": 5
+  },
+  "initialization_refuses_overwrite": true,
+  "clean_initialization": {
+    "passed": true,
+    "auth_files": 0,
+    "plugins": 5,
+    "max_per_key": 5,
+    "new_keys_not_logged": true
+  },
+  "linux_shell_syntax": {
+    "passed": true,
+    "scripts": [
+      "install-docker-ubuntu.sh",
+      "deploy-new-server.sh",
+      "rollback-panel.sh"
+    ]
+  },
+  "compose_schema_on_linux": {
+    "passed": true,
+    "services_started": 0,
+    "uses_snow_panel": true
+  },
+  "full_fresh_server_restore": "not performed; no second server or production test instance started"
+}

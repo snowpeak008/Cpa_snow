@@ -1,0 +1,17 @@
+{
+  "scripts": [
+    {
+      "script": 0,
+      "syntax_ok": true
+    },
+    {
+      "script": 1,
+      "syntax_ok": true
+    },
+    {
+      "script": 2,
+      "syntax_ok": true
+    }
+  ],
+  "sha256": "5efcaf38e363bc2c6b2341e1723ceabb1d8dff612467bcd1925b1617c4bd2d72"
+}
