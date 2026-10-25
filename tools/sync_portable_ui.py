@@ -7,7 +7,7 @@ import subprocess
 import sys
 
 ROOT = Path(__file__).resolve().parents[1]
-DEPLOY = ROOT / 'deployment' if (ROOT / 'deployment').is_dir() else ROOT
+DEPLOY = ROOT / 'deployment' if (ROOT / 'deployment/metadata/files.sha256.json').is_file() else ROOT
 def digest(path):
     with path.open('rb') as f:
         return hashlib.file_digest(f, 'sha256').hexdigest()

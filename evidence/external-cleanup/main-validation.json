@@ -1,0 +1,13 @@
+{
+  "version": "1.0.1",
+  "snapshot_changed_entries": [
+    ".gitignore",
+    "README.md",
+    "README_CN.md",
+    "runtime/panel/management.html"
+  ],
+  "all_other_snapshot_hashes_unchanged": true,
+  "shared_ui_build_inputs_identical": true,
+  "rendered_html_only_version_differs": true,
+  "credential_pattern_file_hits": []
+}
