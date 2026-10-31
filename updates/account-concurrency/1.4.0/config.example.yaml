@@ -1,0 +1,26 @@
+# Merge manually into your own config. Replace both placeholders first.
+# Obtain CALLER_SCOPE_SHA256 using scope_from_key.py; never commit the API Key.
+plugins:
+  enabled: true
+  required-interceptors:
+    account-concurrency: 1.4.0-session-balance
+  configs:
+    account-concurrency:
+      enabled: true
+      priority: 1000
+      store:
+        version: 1.4.0-session-balance
+      max_per_key: 5
+      key_limits:
+        CALLER_SCOPE_SHA256: 100
+      account_limits:
+        claude-example-account-a.json: 5
+        claude-example-account-b.json: 5
+      enforce_account_groups: true
+      account_groups:
+        owner:
+          auth_ids:
+            - claude-example-account-a.json
+            - claude-example-account-b.json
+          key_scopes:
+            - CALLER_SCOPE_SHA256

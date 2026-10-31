@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>账号组与专属 Key · Snow Console</title>
+<style>
+:root{color-scheme:dark;font-family:system-ui,"Microsoft YaHei",sans-serif;background:#0b141d;color:#e8f1f6}body{max-width:1120px;margin:32px auto;padding:0 24px}h1{font-size:28px}p,small{color:#aabcc7;line-height:1.7}header{border-bottom:1px solid #263847;margin-bottom:24px;padding-bottom:16px}.brand{color:#58d7b4;font-size:13px;letter-spacing:2px}.card{background:#111e29;border:1px solid #293c4b;border-radius:12px;padding:20px;margin:16px 0}input,button{font:inherit;border:1px solid #3c5364;border-radius:7px;background:#142633;color:inherit;padding:10px}button{cursor:pointer}button.primary{background:#1b806b;border-color:#40b99c}button:disabled{opacity:.45;cursor:not-allowed}input[type=checkbox]{accent-color:#4ed1ad}label{display:block;padding:8px 0}input[type=password]{min-width:260px}.row{display:flex;flex-wrap:wrap;gap:12px;align-items:center}.grid{display:grid;grid-template-columns:1fr 1fr;gap:24px}.choices{max-height:320px;overflow:auto;border-top:1px solid #263847;padding-top:8px}.badge{color:#62d6b4}.warning{color:#ffd08a}#message{white-space:pre-wrap;line-height:1.7}#summary{white-space:pre-wrap}button.remove{margin-left:auto;color:#ffb0a5}@media(max-width:640px){.grid{grid-template-columns:1fr}body{padding:0 14px}input[type=password]{min-width:0;width:90%}}
+</style></head><body>
+<header><div class="brand">SNOW CONSOLE / 雪峰控制台</div><h1>账号组与专属 Key</h1><p>为每个使用者划分 Claude 账号和 Key。组内无可用账号时返回错误，不借用其他组的账号。</p></header>
+<section class="card" id="login"><label>管理凭证（仅保存在当前页面内存）<input id="credential" type="password" autocomplete="off"></label><button id="load">连接并读取账号与 Key</button><p>只读取认证文件列表、Key 名称和分组配置，不刷新额度，不发模型请求。</p></section>
+<p id="mode" class="warning"></p><div id="message" role="status" aria-live="polite">尚未连接。可以使用 ?demo=1 查看独立演示。</div>
+<section id="editor" hidden>
+<div class="card"><div class="row"><label><input id="enforce" type="checkbox"> 启用专属账号组限制</label><button id="add">新增账号组</button></div><p>每个账号和每个 Key 只能属于一个组；一个组可以绑定多个账号、多个 Key。开启后，未分配的 Key 将被拒绝。账号原来的代理不变。</p></div>
+<div id="groups"></div><div class="card"><h2>保存检查</h2><div id="summary"></div><div class="row"><button id="save" class="primary">检查并保存分组</button><button id="reload">重新读取</button></div><p>保存只影响后续请求，已发出的请求不会被撤回。此候选版尚未完成宿主故障时的隔离保障，不能直接用于正式多用户隔离。</p></div>
+</section>
+<script>
+'use strict';
+const $=id=>document.getElementById(id), demo=new URLSearchParams(location.search).get('demo')==='1';
+let accounts=[],keys={},draft=[],original='',loaded=false,busy=false;
+const configPath='/v0/management/plugins/account-concurrency/config';
+const policy=c=>JSON.stringify({enabled:c.enforce_account_groups===true,groups:Object.entries(c.account_groups||{}).sort(([a],[b])=>a.localeCompare(b)).map(([name,g])=>[name,[...(g.auth_ids||[])].sort(),[...(g.key_scopes||[])].sort()])});
+let demoConfig={enforce_account_groups:false,account_groups:{}};
+const say=s=>{$('message').textContent=s};
+async function api(path,method='GET',body){
+ if(demo){if(path===configPath){if(method==='PATCH')demoConfig={...demoConfig,...body};return structuredClone(demoConfig)}if(path.endsWith('/status'))return {account_groups_valid:true,account_groups_enabled:demoConfig.enforce_account_groups};if(path.endsWith('/auth-files'))return {files:[{id:'demo-a',email:'alice@example.invalid',provider:'claude'},{id:'demo-b',email:'bob@example.invalid',provider:'claude'},{id:'demo-c',email:'carol@example.invalid',provider:'claude',disabled:true}]};if(path.endsWith('/apikeys'))return {keys:{['a'.repeat(64)]:{name:'开发组 Key',masked:'demo…A'},['b'.repeat(64)]:{name:'个人 Key',masked:'demo…B'}}};throw Error('演示接口未定义')}
+ const response=await fetch(path,{method,cache:'no-store',headers:{Authorization:'Bearer '+$('credential').value,'Content-Type':'application/json'},body:body?JSON.stringify(body):undefined});
+ if(!response.ok)throw Error('操作失败，HTTP '+response.status+'；未确认保存成功。');return response.json();
+}
+function node(tag,text,cls){const n=document.createElement(tag);if(text!==undefined)n.textContent=text;if(cls)n.className=cls;return n}
+function ask(message){return new Promise(resolve=>{const panel=node('section',undefined,'card');panel.setAttribute('role','alertdialog');panel.setAttribute('aria-label','确认修改');panel.append(node('p',message));const yes=node('button','确认保存','primary'),no=node('button','取消');const finish=value=>{panel.remove();resolve(value)};yes.onclick=()=>finish(true);no.onclick=()=>finish(false);panel.append(yes,no);$('message').after(panel);panel.scrollIntoView({block:'center'});yes.focus()})}
+function markDirty(){say('有未保存修改。');summarize()}
+function summarize(){const assigned=new Set(draft.flatMap(g=>g.key_scopes));const missing=Object.keys(keys).filter(k=>!assigned.has(k)).length;$('summary').textContent=`${draft.length} 个账号组；${assigned.size} 个 Key 已分配；${missing} 个已知 Key 未分配。`+($('enforce').checked?' 未分配 Key 将无法调用。':' 当前草稿未启用限制。')}
+function render(){
+ const root=$('groups');root.replaceChildren();
+ draft.forEach((g,index)=>{
+  const card=node('section',undefined,'card'),top=node('div',undefined,'row');const name=document.createElement('input');name.value=g.name;name.placeholder='使用者或账号组名称';name.setAttribute('aria-label','账号组名称');name.oninput=()=>{g.name=name.value;markDirty()};top.append(name);
+  const del=node('button','删除此组','remove');del.onclick=async()=>{if(await ask('删除此组？其中的 Key 将变成未分配，保存后生效。')){draft.splice(index,1);render();markDirty()}};top.append(del);card.append(top);
+  const grid=node('div',undefined,'grid');
+  for(const [title,field,options] of [['Claude 账号','auth_ids',accounts.map(a=>[a.id,(a.email||a.name||a.id)+(a.disabled?'（已停用）':'')])],['专属 Key','key_scopes',Object.entries(keys).map(([id,k])=>[id,(k.name||'未命名 Key')+' · '+(k.masked||id.slice(0,8))])]]){
+   const col=node('div');col.append(node('h3',title));const list=node('div',undefined,'choices');
+   const missing=g[field].filter(id=>!options.some(o=>o[0]===id));for(const id of missing)options.push([id,'已绑定但不在当前列表：'+id]);
+   for(const [id,label] of options){const other=draft.find((x,i)=>i!==index&&x[field].includes(id));const line=node('label'),check=document.createElement('input');check.type='checkbox';check.checked=g[field].includes(id);check.disabled=!!other;check.onchange=()=>{g[field]=check.checked?[...g[field],id]:g[field].filter(x=>x!==id);render();markDirty()};line.append(check,document.createTextNode(' '+label+(other?' · 已归属 '+other.name:'')));list.append(line)}
+   col.append(list);grid.append(col)
+  }card.append(grid);root.append(card)
+ });summarize();
+}
+async function load(){try{if(busy)return;busy=true;const [a,k,c]=await Promise.all([api('/v0/management/auth-files'),api('/v0/management/apikeys'),api(configPath)]);accounts=(a.files||[]).filter(x=>x.provider==='claude'||x.type==='claude');keys=k.keys||{};original=policy(c);draft=Object.entries(c.account_groups||{}).map(([name,g])=>({name,auth_ids:[...(g.auth_ids||[])],key_scopes:[...(g.key_scopes||[])]}));$('enforce').checked=c.enforce_account_groups===true;loaded=true;$('editor').hidden=false;render();say('已读取。勾选账号和 Key 后，检查并保存。')}catch(e){say(e.message)}finally{busy=false}}
+$('add').onclick=()=>{draft.push({name:'新账号组 '+(draft.length+1),auth_ids:[],key_scopes:[]});render();markDirty()};$('enforce').onchange=markDirty;
+$('load').onclick=load;$('reload').onclick=async()=>{if(await ask('重新读取将丢弃未保存修改，继续？'))load()};
+$('save').onclick=async()=>{if(!loaded||busy)return;busy=true;$('save').disabled=true;try{
+ const groups=Object.create(null),auths=new Set(),scopes=new Set();for(const g of draft){const name=g.name.trim();if(!name||Object.hasOwn(groups,name))throw Error('账号组名称不能为空或重复。');if(!g.auth_ids.length||!g.key_scopes.length)throw Error('每个组至少选择一个账号和一个 Key。');for(const a of g.auth_ids){if(auths.has(a)||!accounts.some(x=>x.id===a))throw Error('账号重复或已从列表移除，请重新选择。');auths.add(a)}for(const k of g.key_scopes){if(scopes.has(k)||!Object.hasOwn(keys,k))throw Error('Key 重复或已从列表移除，请重新选择。');scopes.add(k)}groups[name]={auth_ids:g.auth_ids,key_scopes:g.key_scopes}}
+ if(draft.length&&!$('enforce').checked)throw Error('已有分组时必须启用限制，避免配置被误认为生效。若要停用，请先移除全部分组。');if($('enforce').checked&&!draft.length)throw Error('启用前至少配置一个完整账号组。');
+ if(policy(await api(configPath))!==original)throw Error('配置已被其他窗口修改，请重新读取后再编辑。');
+ if(!await ask($('summary').textContent+'\n确认保存？'))return;
+ const body={enforce_account_groups:$('enforce').checked,account_groups:groups};await api(configPath,'PATCH',body);const saved=await api(configPath);if(policy(saved)!==policy(body))throw Error('保存后读回不一致，请重新读取核对。');original=policy(saved);const status=await api('/v0/management/plugins/account-concurrency/status');if(status.account_groups_valid!==true||status.account_groups_enabled!==body.enforce_account_groups)throw Error('配置已保存，但运行时未确认生效；请保留现场检查。');say(demo?'演示保存成功；没有访问服务器。':'已保存并核对运行时状态。');
+ }catch(e){say(e.message)}finally{busy=false;$('save').disabled=false}};
+if(demo){$('login').hidden=true;$('mode').textContent='演示模式：仅使用虚构账号和 Key，不连接服务器。';load()}
+</script></body></html>
