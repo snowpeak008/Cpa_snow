@@ -1,0 +1,25 @@
+{
+  "version": "1.4.0-session-balance",
+  "platform": "linux/amd64",
+  "go_version": "1.26.4",
+  "plugin_sha256": "d6e3e56fa21c2c5a7c28db76cce37c1395dcdaf18151384fdcff11ca0042ec60",
+  "source_sha256": {
+    "account_groups.go": "370969ac0840b450ca8d685bdbe83955db3b5f7966cb7f0553d4e47bfb322298",
+    "account_groups_test.go": "ac3bcd406c6f16a3e316d81378bc6546d3c733b45e62659ac14a121f920184cc",
+    "account_limits_test.go": "c91f2db64f82079526c367526a93108975b52dd8d09d659ed366f1b726a5c5eb",
+    "build.sh": "e98e62c9bca53a5240b4e8170b8429642b8168f66e201055d1c0cc031ba6b41d",
+    "go.mod": "90b60d464c620cc5cfc7122079750f181ae6866b34190cc6e8d60eb086f199d5",
+    "go.sum": "e42794fa9b56301ad073de55cac1dea683b320ed951454d8709ffc7156088dd2",
+    "group_menu.go": "73f0433af5bee6d1d3642dfbc49698a0e3782057092b97d52d4fd6c2827eabca",
+    "group_menu.html": "5dd770a0113d21f5ba55f208c571bd22d0409bc28830c2196a2c705bbd254d1a",
+    "key_hundred_test.go": "4711e958938de95af41ac40c8627f53cf06c7cba265c09574757ff4b20dcbb34",
+    "key_limits_test.go": "c6ecf97ae75bf4af6218b1881b3e9515c7e98ba77763c7de2d7ab87b1f062f53",
+    "limiter.go": "638e0a2d7fd46dd6204d37acd5c0acd9d1450a29f8fb16ee96b3607e29b1b8e3",
+    "limiter_test.go": "9496729b15023e473fd99249b77fafa77757487954a83505b299b9d586851308",
+    "main.go": "878a40dc90f07884f673f05e74bfabd29556e9668cf945db986deebde7b2083e",
+    "session_balance_test.go": "2fb991117c2c6051f259fc20f9278ea1d31818f8d1a7491cadcd1f8ae6f284cd"
+  },
+  "full_race_suite_passed": true,
+  "related_race_repetitions": 100,
+  "cpa_guard_sha256_in_integration_test": "1df9c470b4c4fb5d8e098094090a464bb5b07e64d89a21e127fa08f9003b5e0a"
+}

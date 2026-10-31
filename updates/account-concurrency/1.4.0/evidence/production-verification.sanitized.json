@@ -1,0 +1,27 @@
+{
+  "deployed_at": "2026-10-31T21:30:33.545620+08:00",
+  "version": "1.4.0-session-balance",
+  "plugin_sha256": "d6e3e56fa21c2c5a7c28db76cce37c1395dcdaf18151384fdcff11ca0042ec60",
+  "checks": {
+    "only_intended_config_changes": true,
+    "owner_key_100": true,
+    "owner_accounts_five": true,
+    "groups_valid": true,
+    "other_key_limits_unchanged": true,
+    "account_limits_unchanged": true,
+    "version_correct": true,
+    "routing_policy_correct": true,
+    "session_ttl_3600": true
+  },
+  "service_restarted": false,
+  "account_settings_and_proxies_unchanged": true,
+  "model_requests_sent": 0,
+  "limits": {
+    "owner_key": 100,
+    "account": 5,
+    "other_key": 5
+  },
+  "routing_policy": "least-active-sessions-sticky",
+  "session_idle_ttl_seconds": 3600,
+  "evidence_boundary": "Production registration/configuration verified; no live model or load test performed."
+}

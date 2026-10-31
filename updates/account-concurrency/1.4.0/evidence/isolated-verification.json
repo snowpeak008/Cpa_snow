@@ -1,0 +1,32 @@
+{
+  "passed": true,
+  "checks": {
+    "ten_sequential_sessions_balanced_5_5": true,
+    "identical_config_reload_preserves_ten_sessions": true,
+    "three_rounds_same_session_sticky_no_extra_binding": true,
+    "key_boundary_and_same_session_id_isolation": true,
+    "unavailable_account_rebinds_then_stays": true,
+    "bound_full_five_rejects_sixth_without_borrow_or_slot_leak": true,
+    "unassigned_key_rejected": true,
+    "unrelated_bindings_preserved_on_partial_host_list": true
+  },
+  "hot_reload_verified": true,
+  "new_session_sequence": [
+    "synthetic-A",
+    "synthetic-B",
+    "synthetic-A",
+    "synthetic-B",
+    "synthetic-A",
+    "synthetic-B",
+    "synthetic-A",
+    "synthetic-B",
+    "synthetic-A",
+    "synthetic-B"
+  ],
+  "final_active_sessions": 11,
+  "final_active_requests": 0,
+  "mock_requests": 22,
+  "real_model_requests": 0,
+  "network": "none",
+  "cpa_guard_sha256": "1df9c470b4c4fb5d8e098094090a464bb5b07e64d89a21e127fa08f9003b5e0a"
+}

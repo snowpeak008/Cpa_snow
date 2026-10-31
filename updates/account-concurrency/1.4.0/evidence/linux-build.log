@@ -1,0 +1,6 @@
+go version go1.26.4 linux/amd64
+go: downloading gopkg.in/yaml.v3 v3.0.1
+go: downloading gopkg.in/check.v1 v0.0.0-20161208181325-20d25e280405
+ok  	local/cpa-concurrency	1.142s
+d6e3e56fa21c2c5a7c28db76cce37c1395dcdaf18151384fdcff11ca0042ec60  account-concurrency.so
+ok  	local/cpa-concurrency	5.552s
