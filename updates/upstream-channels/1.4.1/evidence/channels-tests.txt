@@ -1,0 +1,30 @@
+(node:47696) ExperimentalWarning: VM Modules is an experimental feature and might change at any time
+(Use `node --trace-warnings ...` to show where the warning was created)
+✔ gpt native config, model prefix, no caller key (2.0021ms)
+✔ claude native config, model prefix, no caller key (0.2005ms)
+✔ grok native config, model prefix, no caller key (0.0932ms)
+✔ remote cleartext and credential-bearing URLs refused (0.2856ms)
+✔ loopback mock transport allowed (0.1011ms)
+✔ proxy optional and explicit protocols (0.1337ms)
+✔ missing or invalid fields rejected (0.2365ms)
+✔ new channel cannot overwrite imported credentials (0.1779ms)
+✔ duplicate prefix rejected (0.1565ms)
+✔ edit blank key preserves key and unknown fields (0.2802ms)
+✔ stale edit rejected (0.2216ms)
+✔ disabled configurations exclude routing (0.127ms)
+✔ type and slug immutable while editing (0.0937ms)
+✔ only channels owned by this editor listed (0.0578ms)
+✔ gpt config-backed identity and safe key editor projection (3.0995ms)
+✔ claude config-backed identity and safe key editor projection (0.2117ms)
+✔ grok config-backed identity and safe key editor projection (0.116ms)
+✔ unready runtime refused but disabled channel assignable (0.1754ms)
+✔ save confirmation verifies enabled state, proxy and models (0.1914ms)
+✔ complete management module parses (57.9006ms)
+ℹ tests 20
+ℹ suites 0
+ℹ pass 20
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 124.9916

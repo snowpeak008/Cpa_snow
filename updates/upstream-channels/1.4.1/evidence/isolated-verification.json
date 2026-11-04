@@ -1,0 +1,18 @@
+{
+  "passed": true,
+  "checks": {
+    "native_v8_configuration_save": true,
+    "gpt_native_and_stream": true,
+    "gpt_cross_key_denied_without_upstream": true,
+    "claude_native_and_stream": true,
+    "claude_cross_key_denied_without_upstream": true,
+    "grok_native_and_stream": true,
+    "grok_cross_key_denied_without_upstream": true,
+    "unassigned_key_denied": true
+  },
+  "real_model_requests": 0,
+  "real_keys_used": false,
+  "network": "none",
+  "native_binary_sha256": "1df9c470b4c4fb5d8e098094090a464bb5b07e64d89a21e127fa08f9003b5e0a",
+  "mock_requests": 6
+}
