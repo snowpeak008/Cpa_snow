@@ -1,0 +1,18 @@
+{
+  "component_version": "0.1.0-dev3",
+  "repository_versions": [
+    "1.0.3",
+    "A.0.4"
+  ],
+  "deployment_scope": "independent_trial_only",
+  "production_deployed": true,
+  "native_cpa_integrated": false,
+  "runtime_sha256": {
+    "app.py": "ba3df4bcdcba79034633f70b5c55b497c1e63adb59df90294d730e13e719ac2a",
+    "console.html": "c32a9c3fbd6651c3eb4750bb6656560c811d72270b224778851de9fe7c2f0b3b",
+    "snow-console-trial.service": "fd1f9502012680bf3bc09cac2ef8aa999aaa00108337743d14a32d63019d61be"
+  },
+  "production_policy_sha256": "ca003ee2f0affd82afb993c0568f075ce04ce5e0899ca6456890d15cc87ddd45",
+  "archived_policy_is_sanitized_template": true,
+  "tests_passed": 33
+}

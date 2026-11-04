@@ -1,4 +1,10 @@
-# Snow Console · 1.0.2
+# Snow Console · 1.0.3
+
+## 1.0.3 · 独立多用户试用入口
+
+已部署 [多用户控制台试用版](updates/multi-user-console/1.0.3-trial/README.md)，支持独立登录、管理员用户管理、资源归属、账号启停/权重政策、用户 Key 与上游 API 管理以及用户改密。**本服务尚未接通 CPA 原生配置和实际调度；试用 Key 不能调用现有 CPA，额度和合计限制尚未生效。**
+
+当前生产 CPA 后台、账号、Key 分组与并发配置保持不变。33 项隔离测试通过，服务器试用入口登录/权限/会话验证通过。归档不包含数据库、实际账号和 Key、初始密码或服务器地址；上游地址名单是必须重新配置的脱敏模板。
 
 Sanitized CPA deployment archive with the deployed GPT / Claude / Grok upstream-channel upgrade.
 

@@ -1,0 +1,31 @@
+[Unit]
+Description=Snow Console independent multi-user trial (CPA runtime not connected)
+After=network.target
+
+[Service]
+Type=simple
+User=snow-console
+Group=snow-console
+WorkingDirectory=/opt/snow-console-trial/releases/1.0.3
+ExecStart=/usr/bin/python3 /opt/snow-console-trial/releases/1.0.3/app.py --data /var/lib/snow-console-users --port 8320 --public-origin http://127.0.0.1:18320
+Restart=on-failure
+RestartSec=5
+UMask=0077
+NoNewPrivileges=true
+ProtectSystem=strict
+ProtectHome=true
+PrivateTmp=true
+PrivateDevices=true
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX
+ReadWritePaths=/var/lib/snow-console-users
+IPAddressDeny=any
+IPAddressAllow=localhost
+MemoryMax=96M
+CPUQuota=25%
+TasksMax=64
+
+[Install]
+WantedBy=multi-user.target

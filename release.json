@@ -1,5 +1,5 @@
 {
-  "version": "1.0.2",
+  "version": "1.0.3",
   "branch": "main",
   "base_commit": "96154f7650de914635db6327ca226c3a94587baf",
   "backend_image": "eceasy/cli-proxy-api:v8.0.31",
@@ -10,8 +10,8 @@
   "cleanup_scope": "Frontend promotion/old-center/build-input cleanup; backend external requests unchanged.",
   "ui_sha256": "2aede19af4624996f61a29d13bad5c543139abcd412c1da4e26bf1927f21556c",
   "base_snapshot_version": "1.0.1",
-  "previous_release_commit": "f137134cea8a138ef2ee7132f677b7dd42fe0ea8",
-  "release_kind": "Historical base snapshot with separately archived deployed upgrade",
+  "previous_release_commit": "7c4d3bf565276927ad353e483821a51c04b1af9b",
+  "release_kind": "Historical CPA base plus deployed independent multi-user trial",
   "upgrade": {
     "path": "updates/upstream-channels/1.4.1",
     "version": "1.4.1-upstream-channels",
@@ -20,5 +20,15 @@
     "plugin_sha256": "919c6f5ad13165263e935f709492149c8e9f2e1dbdf47a6997b420032459fc3e",
     "page_sha256": "47447d00512e16ebe22cd0debdf9f6f5688f1c8324230c541f4ac3fdf7c1a26a",
     "base_snapshot_automatically_upgraded": false
+  },
+  "multi_user_trial": {
+    "path": "updates/multi-user-console/1.0.3-trial",
+    "deployed": true,
+    "deployment_scope": "independent_trial_only",
+    "native_cpa_integrated": false,
+    "deployed_at_utc": "2026-11-04T15:13:54.336786+00:00",
+    "tests_passed": 33,
+    "existing_cpa_unchanged": true,
+    "archived_policy_is_sanitized_template": true
   }
 }
