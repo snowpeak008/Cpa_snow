@@ -1,0 +1,28 @@
+{
+  "version": "1.4.1-upstream-channels",
+  "deployed_at_utc": "2026-11-04T05:48:28.185545+00:00",
+  "last_confirmed_at_utc": "2026-11-04T06:25:49.107302+00:00",
+  "plugin_sha256": "919c6f5ad13165263e935f709492149c8e9f2e1dbdf47a6997b420032459fc3e",
+  "page_sha256": "47447d00512e16ebe22cd0debdf9f6f5688f1c8324230c541f4ac3fdf7c1a26a",
+  "upstream_channels_supported": true,
+  "account_groups_valid": true,
+  "hot_reload": true,
+  "cpa_restarted": false,
+  "account_flags_proxies_unchanged": true,
+  "groups_and_limits_unchanged": true,
+  "only_two_version_fields_changed": true,
+  "memory_session_bindings_reinitialized": true,
+  "existing_key_model_list_checks": [
+    {
+      "http": 200,
+      "model_count": 19
+    },
+    {
+      "http": 200,
+      "model_count": 19
+    }
+  ],
+  "model_requests_sent": 0,
+  "quota_refresh_requests_sent": 0,
+  "evidence_boundary": "Production UI, registration and read-only endpoints verified; real third-party upstreams were not tested."
+}

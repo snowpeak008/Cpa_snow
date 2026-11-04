@@ -1,27 +1,24 @@
-# Snow Console · 1.0.1
+# Snow Console · 1.0.2
 
-Sanitized, reproducible deployment materials for the CPA installation captured on 2026-10-25.
+Sanitized CPA deployment archive with the deployed GPT / Claude / Grok upstream-channel upgrade.
 
-**[中文使用说明](README_CN.md)**
+**[中文使用说明](README_CN.md)** · **[Release notes](RELEASE_NOTES.md)** · **[Production upgrade](updates/upstream-channels/1.4.1/README.md)**
 
-Includes the pinned CPA v8.0.31 image reference, the exact deployed Linux amd64 plugin binaries, the cleaned five-section Snow management UI, matching upstream source releases, and the custom account-concurrency 1.2.1-session-recovery source.
+The 1.0.2 release archives the production `1.4.1-upstream-channels` panel, plugin, source and sanitized validation evidence under `updates/upstream-channels/1.4.1/`. Configure an authorized upstream API URL, Key, model mapping and optional network proxy in “上游渠道”, then assign it in the existing local Key editor.
 
-OAuth credentials, API keys, management secrets, account/proxy bindings, databases, and request logs are excluded. Configure fresh local credentials and import accounts separately before use. No production service was changed while creating this archive.
+GPT/Grok use OpenAI Chat Completions; Claude uses Anthropic Messages. A Responses-only upstream is not supported. Unassigned and cross-group calls fail closed. Real third-party upstreams have not been tested.
 
-Component versions and SHA256 records are in `metadata/`. Original third-party licenses are preserved under `sources/` and `licenses/`.
-
-## Frontend maintenance release
-
-The main branch now uses the same five-section Snow UI as A.0.2, while retaining its original directory layout.
-Removed dormant promotion/provider forms, referral destinations, the legacy center component and runtime hiding patches.
-Builds use the cleaned `web/panel-base.html`, never an archived upstream page. `runtime/panel/management.html` is updated too.
+## Verify the archived files
 
 ```sh
-python tools/build_brand.py
-python tools/sync_portable_ui.py
+python updates/upstream-channels/1.4.1/verify.py
 python scripts/verify_snapshot.py
 ```
 
-Changes were verified with a synthetic localhost management service. No production deployment, account mutation or model request was performed.
-Backend API/OAuth/quota endpoints, catalog/version refreshers, plugin download capabilities and the missing-panel fallback remain unchanged.
-See [release and rollback notes](docs/UI_CLEANUP_1.0.1_CN.txt). The original `1.0.0` tag and `A.0.1` branch remain available.
+## Historical base snapshot
+
+The original v8.0.31 base image, five-section UI, installation materials and older plugins remain preserved with their checksums. This is not an automatic upgrade of that base. Before restoring or applying the new module, check the custom host interfaces and exact tested host hash in the upgrade README; an identical image tag alone is insufficient.
+
+The current production upgrade was hot-loaded without restarting CPA. Its first load rebuilt memory session bindings. Existing accounts, proxies, Key groups and concurrency overrides were preserved. Git changes do not automatically deploy to any server.
+
+No OAuth credentials, API keys, management secrets, account/proxy bindings, SSH private keys, databases or request logs are included. Original third-party licenses and historical snapshots are retained. See UPDATES.md for prior maintenance changes.
