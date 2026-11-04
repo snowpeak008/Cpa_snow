@@ -1,0 +1,9 @@
+{
+  "cpa_origins": [
+    "https://cpa.example.invalid",
+    "http://127.0.0.1:8317",
+    "http://127.0.0.1:18318",
+    "http://127.0.0.1:18741",
+    "http://localhost"
+  ]
+}

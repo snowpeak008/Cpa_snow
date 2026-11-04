@@ -1,0 +1,12 @@
+{
+  ".gitignore": "950de8ff38a868ba290d3f4a5ec2b1e9e2b3401b9f49d5d7371e61a0b8a8add8",
+  "app.py": "ba3df4bcdcba79034633f70b5c55b497c1e63adb59df90294d730e13e719ac2a",
+  "build.json": "da8771bc3c9099b422828ebbf96bdc2e1a6b6785a5e94d052a2e87c3fab450a7",
+  "console.html": "c32a9c3fbd6651c3eb4750bb6656560c811d72270b224778851de9fe7c2f0b3b",
+  "production-verification.json": "f1b6ead54eca5c264a79d0b91c0518d9528f1295a83b8081aa0b77fa93c498a0",
+  "README.md": "96cc05f3a42e84428222c699ca72283834472f1efa6073da43cf4f088f6132cb",
+  "snow-console-trial.service": "fd1f9502012680bf3bc09cac2ef8aa999aaa00108337743d14a32d63019d61be",
+  "test_console.py": "95dd7ca8a4cabca2319b290eee90c281ddec4133088fe8d45a7ac55f3fe05b0a",
+  "upstream-policy.json": "f6db610323112c1ea0b68dae723010b9c34d6546e668152d49dba1b8c2bab3d1",
+  "verify.py": "56024c269585ef664a443be8b1104b519613515e2839c1496268637fc00a8b30"
+}

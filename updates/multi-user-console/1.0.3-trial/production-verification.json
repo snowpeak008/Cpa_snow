@@ -1,0 +1,16 @@
+{
+  "deployed_at_utc": "2026-11-04T15:13:54.336786+00:00",
+  "scope": "independent_trial_only",
+  "native_cpa_integrated": false,
+  "cpa_restarted": false,
+  "cpa_configuration_and_admin_page_unchanged": true,
+  "regular_user_login_verified": true,
+  "ordinary_user_admin_api_denied": true,
+  "wrong_current_password_denied": true,
+  "logout_invalidates_session": true,
+  "production_resources_migrated": 0,
+  "production_keys_migrated": 0,
+  "model_requests_sent": 0,
+  "quota_refresh_requests_sent": 0,
+  "current_isolated_tests_passed": 33
+}
